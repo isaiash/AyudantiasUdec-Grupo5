@@ -23,9 +23,14 @@ public class Login extends AppCompatActivity {
                 String usuario = ((EditText)findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText)findViewById(R.id.password)).getText().toString();
 
-                if(usuario.equals("admin")&& password.equals("admin")){
-                    Intent nuevoform = new Intent(Login.this,MainActivity.class);
-                    startActivity(nuevoform);
+                if(usuario.equals("admin")){
+                    if(password.equals("admin")){
+                        Intent nuevoform = new Intent(Login.this,MainActivity.class);
+                        startActivity(nuevoform);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Contraseña Incorrecto",Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Usuario Incorrecto",Toast.LENGTH_SHORT).show();
