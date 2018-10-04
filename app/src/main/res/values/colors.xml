@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorPlusButton">#FFB732</color>
     <color name="colorTittle">#ffffff</color>
+    <color name="homeBgColor">#ffff</color>
 </resources>
