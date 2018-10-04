@@ -12,6 +12,7 @@ import java.sql.Statement;
 
 public class ControladorBase extends AsyncTask<Void, Void, Void> {
     private Alumno _alumno;
+    private Login _login;
     private Connection c;
     private Statement stmt;
     private Login login;
@@ -25,7 +26,8 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
 
 
 
-    public ControladorBase(Alumno alumno) {
+    public ControladorBase(Alumno alumno, Login login) {
+        _login = login;
         _alumno = alumno;
     }
     public ControladorBase(){_alumno = null;}
@@ -95,8 +97,6 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         switch (tipo) {
             case 1:
-                //    login.setConectado(entro);
-                //   login.comprobarConexion();
                 break;
             default:
                 break;

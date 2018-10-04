@@ -1,5 +1,6 @@
 package ayudec.ayudec;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import static android.os.SystemClock.sleep;
 
 public class Login extends AppCompatActivity {
     private Alumno _alumno;
+    private Login _login = this;
     private ControladorBase _cb;
 
     @Override
@@ -24,15 +26,25 @@ public class Login extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                
+                
                 String usuario = ((EditText) findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
                 _alumno = new Alumno("", usuario, password, "");
 
-                _cb = new ControladorBase(_alumno);
+                _cb = new ControladorBase(_alumno,_login);
                 _cb.setTipo(1);
+
+                ProgressDialog pDialog = new ProgressDialog(_login);
+                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                pDialog.setMessage("Procesando...");
+                pDialog.setCancelable(true);
+                pDialog.setMax(100);
+
+
                 _cb.ejecutar();
 
-                sleep(1000);
                 _alumno = _cb.get_alumno();
 
                 System.out.println(_alumno.get_user() + " -- " + _alumno.get_password() + "(" + _alumno.get_nombre() + ")");

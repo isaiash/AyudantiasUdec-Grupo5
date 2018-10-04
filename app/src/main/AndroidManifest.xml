@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+<<<<<<< HEAD
             android:name=".Login"
+=======
+            android:name=".HomeActivity"
+>>>>>>> 6976ba2917f7b73e8548e7fe1c78ca26acb2f3ea
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
