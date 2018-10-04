@@ -85,10 +85,30 @@ public class HomeActivity extends AppCompatActivity {
                 "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
                 "5");
 
+        Ayudantia ayudantia4 = new Ayudantia("Tania Rivas",
+                "Geofísica",
+                "Física 2",
+                "Martes 10 AM",
+                "IS 2-2",
+                "1",
+                "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
+                "5");
+
+        Ayudantia ayudantia5 = new Ayudantia("Tania Rivas",
+                "Geofísica",
+                "Física 2",
+                "Martes 10 AM",
+                "IS 2-2",
+                "1",
+                "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
+                "5");
+
+
         ayudantias_arraylist.add(ayudantia1);
         ayudantias_arraylist.add(ayudantia2);
         ayudantias_arraylist.add(ayudantia3);
-
+        ayudantias_arraylist.add(ayudantia4);
+        ayudantias_arraylist.add(ayudantia5);
         // Se crea el array a partir del ArrayList
         Ayudantia[] ayudantias = new Ayudantia[ayudantias_arraylist.size()];
         ayudantias = ayudantias_arraylist.toArray(ayudantias);
