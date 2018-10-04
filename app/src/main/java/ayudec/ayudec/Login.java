@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
                 System.out.println(_alumno.get_user() + " -- " + _alumno.get_password() + "(" + _alumno.get_nombre() + ")");
 
                 if (_cb.isEntro()) {
-                    Intent nuevoform = new Intent(Login.this, MainActivity.class);
+                    Intent nuevoform = new Intent(Login.this, HomeActivity.class);
                     startActivity(nuevoform);
                     Toast.makeText(getApplicationContext(), "Bienvenido " + _alumno.get_nombre(), Toast.LENGTH_SHORT).show();
                 } else {
