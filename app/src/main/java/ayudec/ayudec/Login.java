@@ -36,11 +36,6 @@ public class Login extends AppCompatActivity {
                 _cb = new ControladorBase(_alumno,_login);
                 _cb.setTipo(1);
 
-                ProgressDialog pDialog = new ProgressDialog(_login);
-                pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                pDialog.setMessage("Procesando...");
-                pDialog.setCancelable(true);
-                pDialog.setMax(100);
 
 
                 _cb.ejecutar();
