@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FFB732</color>
     <color name="colorPlusButton">#FFB732</color>
     <color name="colorTittle">#ffffff</color>
+    <color name="homeBgColor">#ffffff</color>
 </resources>

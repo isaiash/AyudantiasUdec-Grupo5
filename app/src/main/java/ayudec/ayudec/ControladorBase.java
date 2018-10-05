@@ -15,8 +15,8 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
     private Login _login;
     private Connection c;
     private Statement stmt;
-    private Login login;
     private String query;
+
 
     private int tipo, estado;
 
@@ -25,12 +25,11 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
     ResultSet rs;
 
 
-
     public ControladorBase(Alumno alumno, Login login) {
         _login = login;
         _alumno = alumno;
     }
-    public ControladorBase(){_alumno = null;}
+
 
     public void ConectarBaseDeDatos() {
         try {
@@ -55,14 +54,12 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... params) {
-        System.out.println("HAGOLAWEA");
         Log.e("redirect", "llegue al try");
         try {
             this.ConectarBaseDeDatos();
             Log.e("redirect", "conecte?" + !c.isClosed());
             if (conectado) {
                 Log.e("redirect", "llegue al switch " + tipo);
-                //tipo = 1; // esta wea para que entre al caso
                 switch (tipo) {
                     case 1:
                         query = "SELECT * FROM ayudantia_udec.alumno as al  WHERE al.usuario  = '" + _alumno.get_user() + "' AND al.contraseña = '" + _alumno.get_password() + "';";
@@ -79,6 +76,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                             Log.e("validado", "usuario encontrado");
                             _alumno.set_matricula(rs.getString(1));
                             _alumno.set_nombre(rs.getString(3));
+
                         }
                         stmt.close();
                         rs.close();
@@ -97,6 +95,8 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         switch (tipo) {
             case 1:
+                if (entro) _login.validarEntrada();
+                else _login.negarEntrada();
                 break;
             default:
                 break;

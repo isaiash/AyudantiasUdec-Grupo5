@@ -15,8 +15,8 @@ import static android.os.SystemClock.sleep;
 
 public class Login extends AppCompatActivity {
     private Alumno _alumno;
-    private Login _login = this;
     private ControladorBase _cb;
+    private ProgressDialog _pDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,32 +26,32 @@ public class Login extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                
-                
                 String usuario = ((EditText) findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
                 _alumno = new Alumno("", usuario, password, "");
 
-                _cb = new ControladorBase(_alumno,_login);
+
+                _pDialog = new ProgressDialog(Login.this);
+                _pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                _pDialog.setMessage("Procesando...");
+                _pDialog.setMax(100);
+                _pDialog.show();
+
+                _cb = new ControladorBase(_alumno,Login.this);
                 _cb.setTipo(1);
-
-
-
                 _cb.ejecutar();
-
-                _alumno = _cb.get_alumno();
-
-                System.out.println(_alumno.get_user() + " -- " + _alumno.get_password() + "(" + _alumno.get_nombre() + ")");
-
-                if (_cb.isEntro()) {
-                    Intent nuevoform = new Intent(Login.this, HomeActivity.class);
-                    startActivity(nuevoform);
-                    Toast.makeText(getApplicationContext(), "Bienvenido " + _alumno.get_nombre(), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Usuario y/o contraseña no válidos", Toast.LENGTH_SHORT).show();
-                }
             }
         });
+    }
+    public void validarEntrada(){
+        _alumno = _cb.get_alumno();
+        Intent nuevoform = new Intent(Login.this, HomeActivity.class);
+        startActivity(nuevoform);
+        Toast.makeText(getApplicationContext(), "Bienvenido " + _alumno.get_nombre(), Toast.LENGTH_SHORT).show();
+        _pDialog.dismiss();
+    }
+    public void negarEntrada(){
+        Toast.makeText(getApplicationContext(), "Usuario y/o contraseña no válidos", Toast.LENGTH_SHORT).show();
+        _pDialog.dismiss();
     }
 }
