@@ -1,5 +1,6 @@
 package ayudec.ayudec;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
@@ -126,5 +127,9 @@ public class HomeActivity extends AppCompatActivity {
 
     public void sendAlgo(View view){
         Toast.makeText(HomeActivity.this,"Se apretó botón de enviar.",Toast.LENGTH_SHORT).show();
+    }
+
+    public void ToProfile(View view){
+        startActivity(new Intent(this, ProfileActivity.class));
     }
 }
