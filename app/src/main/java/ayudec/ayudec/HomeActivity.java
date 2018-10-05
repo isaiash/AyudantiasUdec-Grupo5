@@ -15,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private GridView gridView;
     private Ayudantia[] ayudantias;
+    private Alumno _alumno;
     private String result;
 
 
@@ -130,6 +131,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void ToProfile(View view){
-        startActivity(new Intent(this, ProfileActivity.class));
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("alumno", getIntent().getStringExtra("alumno"));
+        startActivity(i);
+    }
+
+    public Alumno get_alumno() {
+        return _alumno;
+    }
+
+    public void set_alumno(Alumno _alumno) {
+        this._alumno = _alumno;
     }
 }

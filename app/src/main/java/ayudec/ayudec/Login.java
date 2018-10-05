@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 
 public class Login extends AppCompatActivity {
@@ -25,7 +28,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String usuario = ((EditText) findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
-                _alumno = new Alumno("", usuario, password, "");
+                _alumno = new Alumno("", usuario, password, "", "");
 
 
                 _pDialog = new ProgressDialog(Login.this);
@@ -43,6 +46,8 @@ public class Login extends AppCompatActivity {
     public void validarEntrada(){
         _alumno = _cb.get_alumno();
         Intent nuevoform = new Intent(Login.this, HomeActivity.class);
+        Gson gson = new Gson();
+        nuevoform.putExtra("alumno", gson.toJson(_alumno));
         startActivity(nuevoform);
         Toast.makeText(getApplicationContext(), "Bienvenido " + _alumno.get_nombre(), Toast.LENGTH_SHORT).show();
         _pDialog.dismiss();

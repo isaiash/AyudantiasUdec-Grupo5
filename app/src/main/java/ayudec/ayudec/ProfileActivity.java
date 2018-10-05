@@ -4,14 +4,17 @@ package ayudec.ayudec;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 import com.allyants.chipview.ChipView;
 import com.allyants.chipview.SimpleChipAdapter;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
+    Alumno _alumno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,13 @@ public class ProfileActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        Alumno _alumno = new Gson().fromJson(getIntent().getStringExtra("alumno"), Alumno.class);
+        ((TextView)findViewById(R.id.userName)).setText(_alumno.get_nombre());
+        ((TextView)findViewById(R.id.userCar)).setText(_alumno.get_carrera());
+        ((TextView)findViewById(R.id.userType)).setText(_alumno.get_matricula());
+
+
         // Prueba con Chipviews
         ChipView cvTag = (ChipView) findViewById(R.id.especView);
         ArrayList<Object> data = new ArrayList<>();

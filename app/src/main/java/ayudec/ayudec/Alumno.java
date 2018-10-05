@@ -2,14 +2,14 @@ package ayudec.ayudec;
 
 public class Alumno {
     
-    private String _nombre, _user, _password, _matricula;
+    private String _nombre, _user, _password, _matricula, _carrera;
 
-    public Alumno(String nombre, String user, String password, String matricula){
+    public Alumno(String nombre, String user, String password, String matricula,String carrera){
         _nombre = nombre;
         _user = user;
         _password = password;
         _matricula = matricula;
-
+        _carrera = carrera;
     }
 
     public String get_nombre() {
@@ -42,5 +42,13 @@ public class Alumno {
 
     public void set_matricula(String _matricula) {
         this._matricula = _matricula;
+    }
+
+    public String get_carrera() {
+        return _carrera;
+    }
+
+    public void set_carrera(String _carrera) {
+        this._carrera = _carrera;
     }
 }
