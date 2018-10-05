@@ -1,11 +1,13 @@
 package ayudec.ayudec;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.allyants.chipview.ChipView;
 import com.allyants.chipview.SimpleChipAdapter;
@@ -23,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
+        // Prueba con Chipviews
         ChipView cvTag = (ChipView)findViewById(R.id.especView);
         ArrayList<Object> data = new ArrayList<>();
         data.add("First Item");
@@ -43,4 +45,8 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
+
+//    public void Profile(View view){
+//        startActivity(new Intent(this, ProfileActivity.class));
+//    }
 }
