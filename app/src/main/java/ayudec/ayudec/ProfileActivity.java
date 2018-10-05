@@ -21,12 +21,12 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity_layout);
 
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
         // Prueba con Chipviews
-        ChipView cvTag = (ChipView)findViewById(R.id.especView);
+        ChipView cvTag = (ChipView) findViewById(R.id.especView);
         ArrayList<Object> data = new ArrayList<>();
         data.add("First Item");
         data.add("Second Item");
@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.home)
+        if (item.getItemId() == R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
