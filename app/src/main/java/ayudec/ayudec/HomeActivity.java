@@ -1,5 +1,6 @@
 package ayudec.ayudec;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private GridView gridView;
     private Ayudantia[] ayudantias;
+    private Alumno _alumno;
     private String result;
 
 
@@ -126,5 +128,19 @@ public class HomeActivity extends AppCompatActivity {
 
     public void sendAlgo(View view){
         Toast.makeText(HomeActivity.this,"Se apretó botón de enviar.",Toast.LENGTH_SHORT).show();
+    }
+
+    public void ToProfile(View view){
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("alumno", getIntent().getStringExtra("alumno"));
+        startActivity(i);
+    }
+
+    public Alumno get_alumno() {
+        return _alumno;
+    }
+
+    public void set_alumno(Alumno _alumno) {
+        this._alumno = _alumno;
     }
 }

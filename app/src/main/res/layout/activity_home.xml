@@ -32,7 +32,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_height="28dp"
                     android:src="@drawable/perfil"
-                    android:onClick="showProfile"/>
+                    android:onClick="ToProfile"/>
             </LinearLayout>
 
             <LinearLayout
