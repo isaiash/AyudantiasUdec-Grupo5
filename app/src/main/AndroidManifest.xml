@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+<<<<<<< HEAD
             android:name=".HomeActivity"
+=======
+            android:name=".Login"
+>>>>>>> 66e84b4d85385337b3d1a8d7b2d05f59f0390377
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,14 +27,10 @@
         </activity>
 
         <activity
-            android:name=".Chat">
-            android:label="Chat de asignaturas"
+            android:name=".MainActivity"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-    </application>
 
+    </application>
 </manifest>
