@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -20,8 +19,15 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Comprueba que la sesion esta iniciada y redirige al home
+        if(((GlobalVariables) this.getApplication()).getSesion_iniciada()){
+            Intent home = new Intent(Login.this, HomeActivity.class);
+            startActivity(home);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         final Button boton = findViewById(R.id.iniciar_sesion);
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,9 +51,9 @@ public class Login extends AppCompatActivity {
     }
     public void validarEntrada(){
         _alumno = _cb.get_alumno();
+        ((GlobalVariables) this.getApplication()).setAlumno(_alumno);
+        ((GlobalVariables)this.getApplication()).setSesion_iniciada(true);//Le indica a la variable sesion_iniciada que esta logeado
         Intent nuevoform = new Intent(Login.this, HomeActivity.class);
-        Gson gson = new Gson();
-        nuevoform.putExtra("alumno", gson.toJson(_alumno));
         startActivity(nuevoform);
         Toast.makeText(getApplicationContext(), "Bienvenido " + _alumno.get_nombre(), Toast.LENGTH_SHORT).show();
         _pDialog.dismiss();
