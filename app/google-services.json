@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "29697158452",
+    "firebase_url": "https://chat-ayudec.firebaseio.com",
+    "project_id": "chat-ayudec",
+    "storage_bucket": "chat-ayudec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29697158452:android:0360b0c841d97e97",
+        "android_client_info": {
+          "package_name": "ayudec.ayudec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29697158452-9gr49g7pe5k35agrqvh0j48mjjgau48t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5TbwNMVZhgOd6DXEekSmXl_BCAEV7uuo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
