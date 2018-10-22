@@ -1,51 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ayudec.ayudec">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
-<<<<<<< HEAD
-<<<<<<< HEAD
-            android:name=".HomeActivity"
-=======
             android:name=".Login"
->>>>>>> 66e84b4d85385337b3d1a8d7b2d05f59f0390377
-=======
-            android:name=".Login"
->>>>>>> e9000b5280ca45fee7004f6b04803482193b4107
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/HomeTheme">
-        </activity>
-
+            android:theme="@style/HomeTheme" />
         <activity
             android:name=".ProfileActivity"
             android:label="Perfil"
+            android:theme="@style/HomeTheme" />
+        <activity
+            android:name=".NuevaAyudantia"
+            android:label="Ayudec"
             android:theme="@style/HomeTheme">
-        </activity>
 
+        </activity>
     </application>
+
 </manifest>

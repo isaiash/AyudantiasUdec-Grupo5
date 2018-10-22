@@ -12,27 +12,34 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical" >
-                <ImageView
+                <ImageButton
                     android:layout_width="wrap_content"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/perfil"
-                    android:onClick="ToProfile"/>
+                    android:gravity="left"
+                    android:src="@drawable/ic_person_white_40dp"
+                    android:onClick="ToProfile"
+                    android:background="?android:selectableItemBackground"/>
             </LinearLayout>
 
             <LinearLayout
@@ -54,11 +61,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical" >
-                <ImageView
+                <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="28dp"
-                    android:src="@drawable/send"
-                    android:onClick="sendAlgo"/>
+                    android:src="@drawable/ic_send_white_24dp"
+                    android:onClick="sendAlgo"
+                    android:background="?android:selectableItemBackground"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="right"
+                    />
             </LinearLayout>
         </LinearLayout>
 

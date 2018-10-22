@@ -120,6 +120,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void addAyudantia(View view){
         Toast.makeText(HomeActivity.this,"Se apretó botón de agregar ayudantía.",Toast.LENGTH_SHORT).show();
+        Intent crearAyudantia = new Intent(HomeActivity.this, NuevaAyudantia.class);
+        startActivity(crearAyudantia);
     }
 
     public void showProfile(View view){
