@@ -76,6 +76,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                             Log.e("validado", "usuario encontrado");
                             _alumno.set_matricula(rs.getString(1));
                             _alumno.set_nombre(rs.getString(3));
+                            _alumno.set_carrera(rs.getString(5));
 
                         }
                         stmt.close();
