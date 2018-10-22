@@ -1,6 +1,5 @@
 package ayudec.ayudec;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         // Prueba con Chipviews
-        ChipView cvTag = (ChipView) findViewById(R.id.especView);
+        ChipView cvTag = findViewById(R.id.especView);
         ArrayList<Object> data = new ArrayList<>();
         data.add("First Item");
         data.add("Second Item");
@@ -59,8 +58,8 @@ public class ProfileActivity extends AppCompatActivity {
         ((GlobalVariables) this.getApplication()).setAlumno(null);//Borra al alumno que estaba logeado
         Intent login = new Intent(ProfileActivity.this, Login.class);
         login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //borra el stack de actividades
+        Toast.makeText(getApplicationContext(), "Cerrando sesion ",Toast.LENGTH_SHORT).show();
         startActivity(login); //vuelve al login
-        Toast.makeText(this,"Cerrando sesión.", Toast.LENGTH_SHORT).show();
     }
 
 //    public void Profile(View view){

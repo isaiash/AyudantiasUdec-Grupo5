@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
 
                 _pDialog = new ProgressDialog(Login.this);
                 _pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                _pDialog.setMessage("Procesando...");
+                _pDialog.setMessage("Iniciando Sesión...");
                 _pDialog.setMax(100);
                 _pDialog.show();
 
