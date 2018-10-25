@@ -28,6 +28,11 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if(!((GlobalVariables)this.getApplication()).getSesion_iniciada()){
+            Toast.makeText(this, "Deslggeado", Toast.LENGTH_SHORT).show();
+            Intent login = new Intent(HomeActivity.this,Login.class);
+            startActivity(login);
+        }
 
 
         // se crean la ayudantias
