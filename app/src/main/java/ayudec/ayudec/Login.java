@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import javax.crypto.SecretKey;
+
 
 public class Login extends AppCompatActivity {
     private Alumno _alumno;
@@ -32,6 +34,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String usuario = ((EditText) findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
+                
                 _alumno = new Alumno("", usuario, password, "", "");
 
 
