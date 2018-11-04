@@ -91,6 +91,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_weight="1"
                         android:text="Marca horarios disponibles"
+                        android:onClick="ToHorario"
                         android:textColor="@android:color/black" />
 
                     <ImageButton

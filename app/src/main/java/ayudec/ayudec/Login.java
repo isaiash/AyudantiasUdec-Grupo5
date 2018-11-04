@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String usuario = ((EditText) findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
-                _alumno = new Alumno("", usuario, password, "", "");
+                _alumno = new Alumno("", usuario, password, "", "", 0);
 
 
                 _pDialog = new ProgressDialog(Login.this);
