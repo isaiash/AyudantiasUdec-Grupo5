@@ -62,6 +62,12 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(login); //vuelve al login
     }
 
+    public void ToHorario(View view){
+        Intent i = new Intent(this, Horario.class);
+        //i.putExtra("alumno", getIntent().getStringExtra("alumno"));
+        startActivity(i);
+    }
+
 //    public void Profile(View view){
 //        startActivity(new Intent(this, ProfileActivity.class));
 //    }
