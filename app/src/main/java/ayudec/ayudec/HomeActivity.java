@@ -16,13 +16,16 @@ public class HomeActivity extends AppCompatActivity {
     private GridView gridView;
     private Ayudantia[] ayudantias;
     private Alumno _alumno;
-    private String result;
+    private View myView;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
 
         // se settea el toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,6 +42,23 @@ public class HomeActivity extends AppCompatActivity {
         ayudantias = crearAyudantias();
 
         gridView = (GridView) findViewById(R.id.gridview);
+
+        gridView.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
+            public void onSwipeRight() {
+                Toast.makeText(HomeActivity.this, "right", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(HomeActivity.this,ProfileActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+
+            public void onSwipeLeft() {
+                Toast.makeText(HomeActivity.this, "left", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(HomeActivity.this,Chat.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
         // Se instancia el adaptador y se setea al gridview con el conjunto de ayudantias
         CustomAdapter ca = new CustomAdapter(this, ayudantias);
         gridView.setAdapter(ca);
@@ -132,7 +152,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void sendAlgo(View view){
-        Toast.makeText(HomeActivity.this,"Se apretó botón de enviar.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(HomeActivity.this,"Se apretó botón de chat.",Toast.LENGTH_SHORT).show();
     }
 
     public void ToProfile(View view){
