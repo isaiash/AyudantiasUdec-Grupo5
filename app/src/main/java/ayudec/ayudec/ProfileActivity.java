@@ -31,9 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.userCar)).setText(_alumno.get_carrera());
         ((TextView)findViewById(R.id.userType)).setText(_alumno.get_matricula());
 
-
         // Prueba con Chipviews
         ChipView cvTag = findViewById(R.id.especView);
+
         ArrayList<Object> data = new ArrayList<>();
         data.add("First Item");
         data.add("Second Item");
@@ -60,6 +60,12 @@ public class ProfileActivity extends AppCompatActivity {
         login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //borra el stack de actividades
         Toast.makeText(getApplicationContext(), "Cerrando sesion ",Toast.LENGTH_SHORT).show();
         startActivity(login); //vuelve al login
+    }
+
+    public void ToHorario(View view){
+        Intent i = new Intent(this, Horario.class);
+        //i.putExtra("alumno", getIntent().getStringExtra("alumno"));
+        startActivity(i);
     }
 
 //    public void Profile(View view){

@@ -40,5 +40,17 @@
             android:theme="@style/HomeTheme">
         </activity>
 
+        <activity
+            android:name=".Horario"
+            android:label="Horario"
+            android:theme="@style/HomeTheme">
+        </activity>
+
+        <activity
+            android:name=".NuevaAyudantia"
+            android:label="NuevaAyudantia"
+            android:theme="@style/HomeTheme">
+        </activity>
+
     </application>
 </manifest>
