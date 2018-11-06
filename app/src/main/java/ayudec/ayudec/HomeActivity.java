@@ -1,5 +1,6 @@
 package ayudec.ayudec;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,13 +14,10 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private GridView gridView;
     private Ayudantia[] ayudantias;
     private Alumno _alumno;
-    private View myView;
 
-
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +39,10 @@ public class HomeActivity extends AppCompatActivity {
         // se crean la ayudantias
         ayudantias = crearAyudantias();
 
-        gridView = (GridView) findViewById(R.id.gridview);
+        GridView gridView = (GridView) findViewById(R.id.gridview);
 
         gridView.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
+            @Override
             public void onSwipeRight() {
                 Toast.makeText(HomeActivity.this, "right", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(HomeActivity.this,ProfileActivity.class);
@@ -51,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
 
+            @Override
             public void onSwipeLeft() {
                 Toast.makeText(HomeActivity.this, "left", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(HomeActivity.this,Chat.class);

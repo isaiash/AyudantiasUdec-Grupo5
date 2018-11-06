@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import javax.crypto.SecretKey;
-
 
 public class Login extends AppCompatActivity {
     private Alumno _alumno;

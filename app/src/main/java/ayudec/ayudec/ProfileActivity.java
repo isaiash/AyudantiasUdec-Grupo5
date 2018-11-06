@@ -31,9 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.userCar)).setText(_alumno.get_carrera());
         ((TextView)findViewById(R.id.userType)).setText(_alumno.get_matricula());
 
-
         // Prueba con Chipviews
         ChipView cvTag = findViewById(R.id.especView);
+
         ArrayList<Object> data = new ArrayList<>();
         data.add("First Item");
         data.add("Second Item");
