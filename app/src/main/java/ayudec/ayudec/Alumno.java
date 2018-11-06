@@ -1,7 +1,7 @@
 package ayudec.ayudec;
 
 public class Alumno {
-    
+
     private String _nombre, _user, _password, _matricula, _carrera;
     private int _horario;
 
