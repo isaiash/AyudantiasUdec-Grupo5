@@ -1,15 +1,16 @@
 package ayudec.ayudec;
 
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.allyants.chipview.ChipView;
 import com.allyants.chipview.SimpleChipAdapter;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -25,15 +26,14 @@ public class ProfileActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
-        Alumno _alumno = new Gson().fromJson(getIntent().getStringExtra("alumno"), Alumno.class);
+        _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
         ((TextView)findViewById(R.id.userName)).setText(_alumno.get_nombre());
         ((TextView)findViewById(R.id.userCar)).setText(_alumno.get_carrera());
         ((TextView)findViewById(R.id.userType)).setText(_alumno.get_matricula());
 
-
         // Prueba con Chipviews
-        ChipView cvTag = (ChipView) findViewById(R.id.especView);
+        ChipView cvTag = findViewById(R.id.especView);
+
         ArrayList<Object> data = new ArrayList<>();
         data.add("First Item");
         data.add("Second Item");
@@ -52,8 +52,36 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
+//borra las variables globales, el stack activities y redirige al activity del login
+    public void cerrarSesion(View view){
+        ((GlobalVariables) this.getApplication()).setSesion_iniciada(false); //Deja la variable global sesion_iniciada en false
+        ((GlobalVariables) this.getApplication()).setAlumno(null);//Borra al alumno que estaba logeado
+        Intent login = new Intent(ProfileActivity.this, Login.class);
+        login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //borra el stack de actividades
+        Toast.makeText(getApplicationContext(), "Cerrando sesion ",Toast.LENGTH_SHORT).show();
+        startActivity(login); //vuelve al login
+    }
+
+    public void ToHorario(View view){
+        Intent i = new Intent(this, Horario.class);
+        //i.putExtra("alumno", getIntent().getStringExtra("alumno"));
+        startActivity(i);
+    }
 
 //    public void Profile(View view){
 //        startActivity(new Intent(this, ProfileActivity.class));
 //    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

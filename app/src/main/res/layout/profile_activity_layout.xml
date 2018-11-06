@@ -91,6 +91,7 @@
                         android:layout_marginHorizontal="16dp"
                         android:layout_weight="1"
                         android:text="Marca horarios disponibles"
+                        android:onClick="ToHorario"
                         android:textColor="@android:color/black" />
 
                     <ImageButton
@@ -297,18 +298,9 @@
                     android:text="Cerrar Sesión"
                     android:textColor="@android:color/holo_red_light"
                     android:textStyle="bold"
+                    android:onClick="cerrarSesion"
                     app:srcCompat="@android:drawable/ic_lock_power_off"/>
 
-                <TextView
-                    android:id="@+id/accDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_weight="1"
-                    android:text="Eliminar Cuenta"
-                    android:textColor="@android:color/holo_red_dark" />
             </LinearLayout>
         </LinearLayout>
 

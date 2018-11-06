@@ -62,7 +62,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                 Log.e("redirect", "llegue al switch " + tipo);
                 switch (tipo) {
                     case 1:
-                        query = "SELECT * FROM ayudantia_udec.alumno as al  WHERE al.usuario  = '" + _alumno.get_user() + "' AND al.contraseña = '" + _alumno.get_password() + "';";
+                        query = "SELECT * FROM ayudantia_udec.alumno as al  WHERE al.usuario  = '" + _alumno.get_user() + "' AND al.password = '" + _alumno.get_password() + "';";
                         System.out.println(query);
                         c = DriverManager.getConnection("jdbc:postgresql://plop.inf.udec.cl:5432/karleyparada/ayudantia_udec", "karleyparada", "karley.123");
                         c.setAutoCommit(false);
@@ -77,6 +77,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                             _alumno.set_matricula(rs.getString(1));
                             _alumno.set_nombre(rs.getString(3));
                             _alumno.set_carrera(rs.getString(5));
+                            _alumno.set_horario(rs.getInt(6));
 
                         }
                         stmt.close();
