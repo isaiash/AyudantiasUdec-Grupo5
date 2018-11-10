@@ -7,7 +7,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/principal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,34 +124,6 @@
                     android:layout_weight="1"
                     android:text="Especialidades"
                     tools:text="Especialidades" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <com.allyants.chipview.ChipView
-                        android:id="@+id/especView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_weight="1"
-
-                        android:textColor="@android:color/black" />
-
-                    <ImageButton
-                        android:id="@+id/btnEditEspec"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="24dp"
-                        android:background="@android:color/transparent"
-                        android:tint="@android:color/holo_blue_light"
-                        app:srcCompat="@android:drawable/ic_menu_edit"
-                        tools:background="@android:color/transparent"
-                        tools:tint="@android:color/holo_blue_dark" />
-                </LinearLayout>
 
             </LinearLayout>
 
