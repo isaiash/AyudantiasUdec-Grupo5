@@ -128,8 +128,9 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                 entro = true;
                                 Log.d("query2", rs.getString(1));
                                 // String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating
-                                // select asignatura.nombre, ayudante.carrera, ayudante.nombre, sala.id_sala, sala.horario, ayudantia.capacidad
-                                Ayudantia aux = new Ayudantia(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), "","");
+                                // select asignatura.nombre, ayudante.carrera, asignatura.nombre, sala.id_sala, sala.horario, ayudantia.capacidad
+                                Ayudantia aux = new Ayudantia(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(6), "","");
+                                Log.d("cupos",aux.getCupos());
                                 ayudantias_arraylist.add(aux);
                             }
                             if(ayudantias_arraylist.size() > 0){

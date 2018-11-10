@@ -49,6 +49,30 @@ public class HomeActivity extends AppCompatActivity {
         // Llama al controlador para que se encargue de llenar la grilla con los datos de la base
         callController();
 
+
+        gridView.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
+            @Override
+            public void onSwipeRight() {
+                Toast.makeText(HomeActivity.this, "right", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(HomeActivity.this,ProfileActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                Toast.makeText(HomeActivity.this, "left", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(HomeActivity.this,Chat.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+            @Override
+            public void onSwipeBottom() {
+                Toast.makeText(HomeActivity.this,"Refrescando!",Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
+            }
+        });
         // Se setean los listener del layout para que identifique cuando se deslice a la derecha e izquierda
         RelativeLayout mainLayout = findViewById(R.id.main_layout);
         mainLayout.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
@@ -66,6 +90,12 @@ public class HomeActivity extends AppCompatActivity {
                 Intent i = new Intent(HomeActivity.this,Chat.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+            @Override
+            public void onSwipeBottom() {
+                Toast.makeText(HomeActivity.this,"Refrescando!",Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
             }
         });
     }

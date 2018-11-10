@@ -90,4 +90,8 @@ public class NuevaAyudantia extends AppCompatActivity {
     public void fallada(String error){
         Toast.makeText(this,error, Toast.LENGTH_SHORT).show();
     }
+
+    public void back(View view){
+        finish();
+    }
 }
