@@ -2,12 +2,15 @@ package ayudec.ayudec;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private Ayudantia[] ayudantias;
     private Alumno _alumno;
+    private GridView gridView;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -37,11 +41,15 @@ public class HomeActivity extends AppCompatActivity {
 
 
         // se crean la ayudantias
-        ayudantias = crearAyudantias();
+        //ayudantias = crearAyudantias();
 
-        GridView gridView = (GridView) findViewById(R.id.gridview);
+        doAll();
 
-        gridView.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
+        gridView = (GridView) findViewById(R.id.gridview);
+
+
+        RelativeLayout mainLayout = findViewById(R.id.main_layout);
+        mainLayout.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
             @Override
             public void onSwipeRight() {
                 Toast.makeText(HomeActivity.this, "right", Toast.LENGTH_SHORT).show();
@@ -60,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // Se instancia el adaptador y se setea al gridview con el conjunto de ayudantias
+        /*
         CustomAdapter ca = new CustomAdapter(this, ayudantias);
         gridView.setAdapter(ca);
 
@@ -76,12 +85,20 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
+        */
+    }
+
+    public void doAll(){
+        ControladorBase _cb = new ControladorBase();
+        _cb.setHome(HomeActivity.this);
+        _cb.setTipo(2);
+        _cb.ejecutar();
     }
 
     // Método de prueba para crear la lista de ayudantias (Esto se debe generar a partir de una consulta)
     // En este ejemplo se crean 2 ayudantias, se agregan al ArrayList y luego el ArrayList se transforma en Array
     // Se hizo de esta forma ya que el adaptador requiere un Array (no ArrayList) y los arrays de java deben ser instanciados con su tamaño
-    // Al no saber el tamaño se hace de esta forma super weona
+    // Al no saber el tamaño se hace de esta forma super ineficiente
     private Ayudantia[] crearAyudantias(){
         ArrayList<Ayudantia> ayudantias_arraylist = new ArrayList<Ayudantia>();
 
@@ -141,6 +158,30 @@ public class HomeActivity extends AppCompatActivity {
         ayudantias = ayudantias_arraylist.toArray(ayudantias);
 
         return ayudantias;
+    }
+
+    public void setAyudantias(final Ayudantia[] listaAyudantias){
+        Log.d("method", "setAyudantias");
+        for(int i=0; i<listaAyudantias.length; i++){
+            Log.d("ayudante", listaAyudantias[i].getNombre());
+        }
+
+        CustomAdapter ca = new CustomAdapter(this, listaAyudantias);
+        gridView.setAdapter(ca);
+
+        // Se agrega el Listener
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+
+                String ramo = listaAyudantias[position].getRamo();
+                String ayudante = listaAyudantias[position].getNombre();
+                Toast.makeText(HomeActivity.this, " Ayudantia: " + ramo + " Ayudante: " + ayudante,
+                        Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
     }
 
     public void addAyudantia(View view){
