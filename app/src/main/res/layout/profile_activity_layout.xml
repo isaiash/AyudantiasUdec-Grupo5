@@ -7,7 +7,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/principal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,8 +88,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+<<<<<<< HEAD
                     android:text="Marca tus horarios disponibles..."
                     android:textColor="@android:color/holo_blue_dark" />
+=======
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_weight="1"
+                        android:text="Marca horarios disponibles"
+                        android:onClick="ToHorario"
+                        android:textColor="@android:color/black" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="24dp"
+                        android:background="@android:drawable/screen_background_light_transparent"
+                        android:tint="@android:color/holo_blue_light"
+                        app:srcCompat="@android:drawable/ic_menu_my_calendar"
+                        tools:background="@android:color/transparent"
+                        tools:tint="@android:color/holo_blue_dark" />
+                </LinearLayout>
+>>>>>>> 299667b83039d389c6a2becf5711431bb81dfcad
 
             </LinearLayout>
 
@@ -111,6 +139,7 @@
                     android:text="Contacto"
                     android:textStyle="bold" />
 
+<<<<<<< HEAD
                 <LinearLayout
                     android:id="@+id/correoLayout"
                     android:layout_width="match_parent"
@@ -148,6 +177,9 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayoutRes">
+=======
+            </LinearLayout>
+>>>>>>> 299667b83039d389c6a2becf5711431bb81dfcad
 
                     <TextView
                         android:id="@+id/nroTelefono"
@@ -275,6 +307,7 @@
                     android:layout_weight="1"
                     android:text="Cerrar Sesión"
                     android:textColor="@android:color/holo_red_light"
+<<<<<<< HEAD
                     android:textStyle="bold" />
 
                 <TextView
@@ -288,6 +321,12 @@
                     android:textColor="@android:color/holo_red_dark"
                     android:textStyle="bold" />
 
+=======
+                    android:textStyle="bold"
+                    android:onClick="cerrarSesion"
+                    app:srcCompat="@android:drawable/ic_lock_power_off"/>
+
+>>>>>>> 299667b83039d389c6a2becf5711431bb81dfcad
             </LinearLayout>
         </LinearLayout>
 

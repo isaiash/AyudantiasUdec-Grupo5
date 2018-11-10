@@ -15,5 +15,21 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
->>>>>>> master
+    <string name="nueva_ayudantia">Nueva Ayudantía</string>
+    <string name="asignatura">Asignatura</string>
+    <string name="horario">Horario</string>
+    <string name="sala">Sala</string>
+    <string name="cupos">Cupos</string>
+    <string name="imporrt">Import</string>
+    <string name="gallery">Gallery</string>
+    <string name="slideshow">Slideshow</string>
+    <string name="tools">Tools</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+
+    <!-- PARA PROBAR SPINNER DE CREAR AYUDANTIA, DESPUES SE AGREGA EL CONTENIDO DE FORMA DINAMICA -->
+    <string-array name="asignaturas">
+        <item>Cálculo 3</item>
+        <item>Física 2</item>
+        <item>Programación I</item>
+    </string-array>
 </resources>

@@ -1,23 +1,27 @@
 package ayudec.ayudec;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private GridView gridView;
     private Ayudantia[] ayudantias;
-    private String result;
+    private Alumno _alumno;
+    private GridView gridView;
 
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,14 +31,85 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        if(!((GlobalVariables)this.getApplication()).getSesion_iniciada()){
+            Toast.makeText(this, "Deslggeado", Toast.LENGTH_SHORT).show();
+            Intent login = new Intent(HomeActivity.this,Login.class);
+            startActivity(login);
+        }
 
         // se crean la ayudantias
-        ayudantias = crearAyudantias();
+        //ayudantias = crearAyudantias();
 
         gridView = (GridView) findViewById(R.id.gridview);
-        // Se instancia el adaptador y se setea al gridview con el conjunto de ayudantias
-        CustomAdapter ca = new CustomAdapter(this, ayudantias);
+
+
+        // Llama al controlador para que se encargue de llenar la grilla con los datos de la base
+        callController();
+
+
+        gridView.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
+            @Override
+            public void onSwipeRight() {
+                Intent i = new Intent(HomeActivity.this,ProfileActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                Toast.makeText(HomeActivity.this, "left", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(HomeActivity.this,Chat.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+            @Override
+            public void onSwipeBottom() {
+                Toast.makeText(HomeActivity.this,"Refrescando!",Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        // Se setean los listener del layout para que identifique cuando se deslice a la derecha e izquierda
+        RelativeLayout mainLayout = findViewById(R.id.main_layout);
+        mainLayout.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
+            @Override
+            public void onSwipeRight() {
+                Toast.makeText(HomeActivity.this, "right", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(HomeActivity.this,ProfileActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                Toast.makeText(HomeActivity.this, "left", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(HomeActivity.this,Chat.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+            @Override
+            public void onSwipeBottom() {
+                Toast.makeText(HomeActivity.this,"Refrescando!",Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
+            }
+        });
+    }
+
+    // Método que instancia un controlador y lo ejecuta para obtener las ayudantías para la grilla
+    public void callController(){
+        ControladorBase _cb = new ControladorBase();
+        _cb.setHome(HomeActivity.this);
+        _cb.setTipo(2);
+        _cb.ejecutar();
+    }
+
+    // Método que setea la lista de ayudantías obtenidas por el controlador en la grilla
+    public void setAyudantias(final Ayudantia[] listaAyudantias){
+
+        this.ayudantias = listaAyudantias;
+
+        CustomAdapter ca = new CustomAdapter(this, this.ayudantias);
         gridView.setAdapter(ca);
 
         // Se agrega el Listener
@@ -52,84 +127,20 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    // Método de prueba para crear la lista de ayudantias (Esto se debe generar a partir de una consulta)
-    // En este ejemplo se crean 2 ayudantias, se agregan al ArrayList y luego el ArrayList se transforma en Array
-    // Se hizo de esta forma ya que el adaptador requiere un Array (no ArrayList) y los arrays de java deben ser instanciados con su tamaño
-    // Al no saber el tamaño se hace de esta forma super weona
-    private Ayudantia[] crearAyudantias(){
-        ArrayList<Ayudantia> ayudantias_arraylist = new ArrayList<Ayudantia>();
-
-        Ayudantia ayudantia1 = new Ayudantia("Francisco Salas",
-                "Ingeniería Civil Informática",
-                "IMU",
-                "Jueves 5 PM",
-                "TM 3-1",
-                "13",
-                "https://cdn.xl.thumbs.canstockphoto.es/lindo-triste-malhumorado-gato-icon-gato-avatar-eps-vectorial_csp49239081.jpg",
-                "3");
-
-        Ayudantia ayudantia2 = new Ayudantia("Tania Rivas",
-                "Geofísica",
-                "Física 2",
-                "Martes 10 AM",
-                "IS 2-2",
-                "1",
-                "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
-                "5");
-
-        Ayudantia ayudantia3 = new Ayudantia("Juan Perez",
-                "Ingeniería Civil Industrial",
-                "Cálculo 3",
-                "Lunes 3 PM",
-                "TM 3-8",
-                "18",
-                "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
-                "5");
-
-        Ayudantia ayudantia4 = new Ayudantia("Tania Rivas",
-                "Geofísica",
-                "Física 2",
-                "Martes 10 AM",
-                "IS 2-2",
-                "1",
-                "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
-                "5");
-
-        Ayudantia ayudantia5 = new Ayudantia("Tania Rivas",
-                "Geofísica",
-                "Física 2",
-                "Martes 10 AM",
-                "IS 2-2",
-                "1",
-                "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
-                "5");
-
-
-        ayudantias_arraylist.add(ayudantia1);
-        ayudantias_arraylist.add(ayudantia2);
-        ayudantias_arraylist.add(ayudantia3);
-        ayudantias_arraylist.add(ayudantia4);
-        ayudantias_arraylist.add(ayudantia5);
-        // Se crea el array a partir del ArrayList
-        Ayudantia[] ayudantias = new Ayudantia[ayudantias_arraylist.size()];
-        ayudantias = ayudantias_arraylist.toArray(ayudantias);
-
-        return ayudantias;
-    }
-
+    // método llamado por el botón (+)
     public void addAyudantia(View view){
-        Toast.makeText(HomeActivity.this,"Se apretó botón de agregar ayudantía.",Toast.LENGTH_SHORT).show();
-    }
-
-    public void showProfile(View view){
-        Toast.makeText(HomeActivity.this,"Se apretó botón de perfil.",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(HomeActivity.this,"Se apretó botón de agregar ayudantía.",Toast.LENGTH_SHORT).show();
+        Intent crearAyudantia = new Intent(HomeActivity.this, NuevaAyudantia.class);
+        startActivity(crearAyudantia);
     }
 
     public void sendAlgo(View view){
-        Toast.makeText(HomeActivity.this,"Se apretó botón de enviar.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(HomeActivity.this,"Se apretó botón de chat.",Toast.LENGTH_SHORT).show();
     }
 
     public void ToProfile(View view){
-        startActivity(new Intent(this, ProfileActivity.class));
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("alumno", getIntent().getStringExtra("alumno"));
+        startActivity(i);
     }
 }

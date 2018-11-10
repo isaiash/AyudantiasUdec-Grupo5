@@ -1,7 +1,6 @@
 package ayudec.ayudec;
 
 import android.app.ActionBar;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -25,7 +24,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private GridView gridView;
+    GridView gridView;
     private Ayudantia[] ayudantias;
     DrawerLayout drawer;
 

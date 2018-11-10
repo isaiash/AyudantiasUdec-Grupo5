@@ -3,14 +3,11 @@ package ayudec.ayudec;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import static android.os.SystemClock.sleep;
 
 
 public class Login extends AppCompatActivity {
@@ -19,25 +16,34 @@ public class Login extends AppCompatActivity {
     private ProgressDialog _pDialog;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        //Comprueba que la sesion esta iniciada y redirige al home
+        if(((GlobalVariables) this.getApplication()).getSesion_iniciada()){
+            Intent home = new Intent(Login.this, HomeActivity.class);
+            startActivity(home);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        final Button boton = (Button) findViewById(R.id.iniciar_sesion);
+
+        final Button boton = findViewById(R.id.iniciar_sesion);
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String usuario = ((EditText) findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
-                _alumno = new Alumno("", usuario, password, "");
+                _alumno = new Alumno("", usuario, password, "", "", 0);
 
 
                 _pDialog = new ProgressDialog(Login.this);
                 _pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                _pDialog.setMessage("Procesando...");
+                _pDialog.setMessage("Iniciando Sesión...");
                 _pDialog.setMax(100);
                 _pDialog.show();
 
-                _cb = new ControladorBase(_alumno,Login.this);
+                _cb = new ControladorBase();
+                _cb.set_alumno(_alumno);
+                _cb.setLogin(Login.this);
                 _cb.setTipo(1);
                 _cb.ejecutar();
             }
@@ -45,6 +51,8 @@ public class Login extends AppCompatActivity {
     }
     public void validarEntrada(){
         _alumno = _cb.get_alumno();
+        ((GlobalVariables) this.getApplication()).setAlumno(_alumno);
+        ((GlobalVariables)this.getApplication()).setSesion_iniciada(true);//Le indica a la variable sesion_iniciada que esta logeado
         Intent nuevoform = new Intent(Login.this, HomeActivity.class);
         startActivity(nuevoform);
         Toast.makeText(getApplicationContext(), "Bienvenido " + _alumno.get_nombre(), Toast.LENGTH_SHORT).show();
