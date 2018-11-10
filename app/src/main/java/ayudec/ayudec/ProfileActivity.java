@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private Alumno _alumno;
+    private ControladorBase _cb;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,18 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-        // Prueba con Chipviews
-        ChipView cvTag = (ChipView) findViewById(R.id.especView);
-        ArrayList<Object> data = new ArrayList<>();
-        data.add("First Item");
-        data.add("Second Item");
-        data.add("Third Item");
-        data.add("Fourth Item");
-        data.add("Fifth Item");
-        data.add("Sixth Item");
-        data.add("Seventh Item");
-        SimpleChipAdapter adapter = new SimpleChipAdapter(data);
-        cvTag.setAdapter(adapter);
+
     }
 
     @Override
@@ -45,8 +37,4 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
-
-//    public void Profile(View view){
-//        startActivity(new Intent(this, ProfileActivity.class));
-//    }
 }
