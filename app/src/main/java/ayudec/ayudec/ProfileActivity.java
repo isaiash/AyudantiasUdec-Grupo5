@@ -25,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ScrollView sv = (ScrollView) findViewById(R.id.principal);
 
+        // Listener para hacer swipe a la derecha y volver a la activity Home
         sv.setOnTouchListener(new OnSwipeTouchListener(ProfileActivity.this) {
             @Override
             public void onSwipeLeft() {
@@ -33,11 +34,12 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        // Se obtiene el alumno a partir de la variable global
         _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
         ((TextView)findViewById(R.id.userName)).setText(_alumno.get_nombre());
         ((TextView)findViewById(R.id.userCar)).setText(_alumno.get_carrera());
@@ -51,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
-//borra las variables globales, el stack activities y redirige al activity del login
+// Borra las variables globales, el stack de activities y redirige al activity del login
     public void cerrarSesion(View view){
         ((GlobalVariables) this.getApplication()).setSesion_iniciada(false); //Deja la variable global sesion_iniciada en false
         ((GlobalVariables) this.getApplication()).setAlumno(null);//Borra al alumno que estaba logeado

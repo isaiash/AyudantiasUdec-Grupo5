@@ -18,13 +18,14 @@ public class CustomAdapter extends BaseAdapter {
         int cupos = Integer.parseInt(cupos_);
 
         if(cupos > 15){
-            return Color.parseColor("#19571E");
+            return Color.parseColor("#CC2828");
+
         }
         else if(cupos > 10){
             return Color.parseColor("#CDC648");
         }
         else{
-            return Color.parseColor("#CC2828");
+            return Color.parseColor("#19571E");
         }
 
     }
@@ -82,7 +83,7 @@ public class CustomAdapter extends BaseAdapter {
         // Se le pone los cupos a la textview
         TextView cupos_tv = (TextView) myView.findViewById(R.id.cupos_tv);
         String cupos = ayudantias[position].getCupos();
-        cupos_tv.setText(cupos + "/20");
+        cupos_tv.setText(cupos + "/" + cupos);
         cupos_tv.setTextColor(setColor(cupos));
 
         // Se le pone la carrera a la textview
