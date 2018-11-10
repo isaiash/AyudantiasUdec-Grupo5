@@ -172,7 +172,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:inputType="textPassword"
-                    android:textColor="?android:attr/colorPressedHighlight"
+                    android:textColor="@android:color/white"
                     android:textSize="18sp" />
             </LinearLayout>
 
