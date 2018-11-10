@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FFB732</color>
     <color name="colorPlusButton">#FFB732</color>
+    <color name="colorpassword">#FF0000</color>
     <color name="colorTittle">#ffffff</color>
     <color name="homeBgColor">#ffffff</color>
 </resources>

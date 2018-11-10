@@ -95,7 +95,7 @@
         android:id="@+id/password"
         android:layout_width="190dp"
         android:layout_height="45dp"
-        android:background="red"
+        android:background="@color/colorpassword"
         android:ems="10"
         android:inputType="textPassword"
         android:textColor="?android:attr/colorPressedHighlight"
