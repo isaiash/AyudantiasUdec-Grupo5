@@ -41,7 +41,9 @@ public class Login extends AppCompatActivity {
                 _pDialog.setMax(100);
                 _pDialog.show();
 
-                _cb = new ControladorBase(_alumno,Login.this);
+                _cb = new ControladorBase();
+                _cb.set_alumno(_alumno);
+                _cb.setLogin(Login.this);
                 _cb.setTipo(1);
                 _cb.ejecutar();
             }
