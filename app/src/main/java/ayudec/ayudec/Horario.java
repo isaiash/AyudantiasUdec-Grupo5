@@ -47,7 +47,7 @@ public class Horario extends AppCompatActivity{
 
         @SuppressWarnings("deprecation")
         final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.FILL_PARENT, 70-1);
+                RelativeLayout.LayoutParams.FILL_PARENT, 100-1);
         Button button = new Button(getApplicationContext());
         button.setLayoutParams(params);
         if (status) {
@@ -110,10 +110,10 @@ public class Horario extends AppCompatActivity{
                 for (int i = 0; i < size; i++) {
                     System.out.println(i);
                     if (weekDatas[i]) {
-                        day.get(i/13).addView(getButtonToLayout((i%13)*70, "id1", i, weekDatas[i]));
+                        day.get(i/13).addView(getButtonToLayout((i%13)*100, "id1", i, weekDatas[i]));
                     }
                     else{
-                        day.get(i/13).addView(getButtonToLayout((i%13)*70, "id1", i, weekDatas[i]));
+                        day.get(i/13).addView(getButtonToLayout((i%13)*100, "id1", i, weekDatas[i]));
                     }
                 }
             } catch (Exception e) {

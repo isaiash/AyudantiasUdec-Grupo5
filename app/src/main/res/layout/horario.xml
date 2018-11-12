@@ -139,98 +139,6 @@
             android:padding="0dp"
             android:scrollbars="none" >
 
-            <RelativeLayout
-                android:id="@+id/relativeLayout242"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="0dp" >
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="0dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="40dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="80dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="120dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="160dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="200dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="240dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="280dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="320dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="360dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="400dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="440dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="480dp"
-                    android:background="#aaa" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="520dp"
-                    android:background="#aaa" />
-
-
-
                 <LinearLayout
                     android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
@@ -240,20 +148,14 @@
                     <RelativeLayout
                         android:id="@+id/relativeLayout2"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:padding="0dp" >
-
-                        <View
-                            android:layout_width="1dp"
-                            android:layout_height="fill_parent"
-                            android:layout_alignParentRight="true"
-                            android:background="#aaa" />
 
                         <TextView
                             android:id="@+id/textView8am"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:gravity="center"
                             android:text="8:00"
@@ -262,7 +164,7 @@
                         <TextView
                             android:id="@+id/textView9am"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="40dp"
                             android:gravity="center"
                             android:text="9:00"
@@ -271,7 +173,7 @@
                         <TextView
                             android:id="@+id/textView10am"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="80dp"
                             android:gravity="center"
                             android:text="10:00"
@@ -280,7 +182,7 @@
                         <TextView
                             android:id="@+id/textView11am"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="120dp"
                             android:gravity="center"
                             android:text="11:00"
@@ -289,7 +191,7 @@
                         <TextView
                             android:id="@+id/textView12pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="160dp"
                             android:gravity="center"
                             android:text="12:00"
@@ -298,7 +200,7 @@
                         <TextView
                             android:id="@+id/textView1pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="200dp"
                             android:gravity="center"
                             android:text="13:00"
@@ -307,7 +209,7 @@
                         <TextView
                             android:id="@+id/textView2pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="240dp"
                             android:gravity="center"
                             android:text="14:00"
@@ -316,7 +218,7 @@
                         <TextView
                             android:id="@+id/textView3pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="280dp"
                             android:gravity="center"
                             android:text="15:00"
@@ -325,7 +227,7 @@
                         <TextView
                             android:id="@+id/textView4pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="320dp"
                             android:gravity="center"
                             android:text="16:00"
@@ -334,7 +236,7 @@
                         <TextView
                             android:id="@+id/textView5pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="360dp"
                             android:gravity="center"
                             android:text="17:00"
@@ -343,7 +245,7 @@
                         <TextView
                             android:id="@+id/textView6pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="400dp"
                             android:gravity="center"
                             android:text="18:00"
@@ -352,7 +254,7 @@
                         <TextView
                             android:id="@+id/textView7pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="440dp"
                             android:gravity="center"
                             android:text="19:00"
@@ -361,12 +263,11 @@
                         <TextView
                             android:id="@+id/textView8pm"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="480dp"
                             android:gravity="center"
                             android:text="20:00"
                             android:textColor="#000" />
-
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -375,94 +276,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="14"
                         android:padding="0dp" >
-
-                        <LinearLayout
-                            android:id="@+id/linearLayout3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_alignParentTop="true"
-                            android:padding="0dp" >
-
-                            <RelativeLayout
-                                android:id="@+id/relativeLayoutMonDay"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2" >
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="fill_parent"
-                                    android:layout_alignParentRight="true"
-                                    android:background="#aaa" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/relativeLayoutTueDay"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2" >
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="fill_parent"
-                                    android:layout_alignParentRight="true"
-                                    android:background="#aaa" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/relativeLayoutWedDay"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2" >
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="fill_parent"
-                                    android:layout_alignParentRight="true"
-                                    android:background="#aaa" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/relativeLayoutThuDay"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2" >
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="fill_parent"
-                                    android:layout_alignParentRight="true"
-                                    android:background="#aaa" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/relativeLayoutFriDay"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2" >
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="fill_parent"
-                                    android:layout_alignParentRight="true"
-                                    android:background="#aaa" />
-
-                                <Button
-                                    android:id="@+id/button1"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="180dp"
-                                    android:layout_marginTop="480dp"
-                                    android:background="@null"
-                                    android:text="JO032"
-                                    android:textSize="10sp"
-                                    android:visibility="gone" />
-                            </RelativeLayout>
-                        </LinearLayout>
                     </RelativeLayout>
                 </LinearLayout>
-            </RelativeLayout>
         </ScrollView>
 
     </LinearLayout>
