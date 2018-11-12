@@ -22,6 +22,12 @@ import android.widget.Toast;
 
 import com.allyants.chipview.ChipView;
 import com.allyants.chipview.SimpleChipAdapter;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import java.util.ArrayList;
 
@@ -31,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ControladorBase _cb;
     String defCorreoText = "Presiona para ingresar un correo electrónico...";
     String defFonoText = "Presiona para ingresar un número telefónico...";
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +51,33 @@ public class ProfileActivity extends AppCompatActivity {
         final EditText inputCorreo = findViewById(R.id.correoInput);
         final EditText inputFono = findViewById(R.id.fonoInput);
 
-
         inputCorreo.setVisibility(View.GONE);
         inputFono.setVisibility(View.GONE);
 
+        callbackManager = CallbackManager.Factory.create();
+
         // Se obtiene el alumno a partir de la variable global
         _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
+
+        // Obtiene el correo del alumno desde la BD
+        String correoEnBase = _alumno.get_correo();
+
+        // Obtiene el teléfono del alumno desde la BD
+        String fonoEnBase = _alumno.get_telefono();
+
+        //Mostrar correo en la actividad
+        if (correoEnBase != null) {
+            correoElectText.setText(correoEnBase);
+        }
+        //Mostrar fono en la actividad
+        if (fonoEnBase != null) {
+            fonoText.setText(fonoEnBase);
+        }
+
         ((TextView)findViewById(R.id.userName)).setText(_alumno.get_nombre());
+
         ((TextView)findViewById(R.id.userCar)).setText(_alumno.get_carrera());
+
         ((TextView)findViewById(R.id.userType)).setText(_alumno.get_matricula());
 
         // Listener para hacer swipe a la derecha y volver a la activity Home
@@ -84,6 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
                     } else {
                         if (isValidEmail(correo)){
                             correoElectText.setText(correo);
+                            _alumno.set_correo(correo);
                             correoElectText.setVisibility(View.VISIBLE);
                             Toast.makeText(getApplicationContext(),"Correo electrónico actualizado.", Toast.LENGTH_SHORT).show();
                             hideKeyboardFrom(getApplicationContext(),view);
@@ -130,6 +157,7 @@ public class ProfileActivity extends AppCompatActivity {
                     } else {
                         if (isValidPhone(numeroTel) ) {
                             fonoText.setText(numeroTel);
+                            _alumno.set_telefono(numeroTel);
                             fonoText.setVisibility(View.VISIBLE);
                             Toast.makeText(getApplicationContext(), "Número de teléfono actualizado.", Toast.LENGTH_SHORT).show();
                             hideKeyboardFrom(getApplicationContext(), view);
@@ -160,6 +188,31 @@ public class ProfileActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+                Profile profile = Profile.getCurrentProfile();
+                String msg = profile.getFirstName() + " " + profile.getLastName();
+                Toast.makeText(ProfileActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
     }
 
     @Override
@@ -167,6 +220,12 @@ public class ProfileActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 // Borra las variables globales, el stack de activities y redirige al activity del login

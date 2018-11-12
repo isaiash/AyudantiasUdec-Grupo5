@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Ayudec</string>
-    <string name="facebook_app_id">1932388146875817</string> <string name="fb_login_protocol_scheme">fb557800921357698</string>
+    <string name="facebook_app_id">253886468814916</string> <string name="fb_login_protocol_scheme">fb253886468814916</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
