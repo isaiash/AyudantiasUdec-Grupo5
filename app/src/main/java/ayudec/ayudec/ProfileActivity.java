@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,28 +23,28 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity_layout);
 
+        ScrollView sv = (ScrollView) findViewById(R.id.principal);
+
+        // Listener para hacer swipe a la derecha y volver a la activity Home
+        sv.setOnTouchListener(new OnSwipeTouchListener(ProfileActivity.this) {
+            @Override
+            public void onSwipeLeft() {
+                finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+
+        // Se obtiene el alumno a partir de la variable global
         _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
         ((TextView)findViewById(R.id.userName)).setText(_alumno.get_nombre());
         ((TextView)findViewById(R.id.userCar)).setText(_alumno.get_carrera());
         ((TextView)findViewById(R.id.userType)).setText(_alumno.get_matricula());
 
-        // Prueba con Chipviews
-        ChipView cvTag = findViewById(R.id.especView);
-
-        ArrayList<Object> data = new ArrayList<>();
-        data.add("First Item");
-        data.add("Second Item");
-        data.add("Third Item");
-        data.add("Fourth Item");
-        data.add("Fifth Item");
-        data.add("Sixth Item");
-        data.add("Seventh Item");
-        SimpleChipAdapter adapter = new SimpleChipAdapter(data);
-        cvTag.setAdapter(adapter);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
-//borra las variables globales, el stack activities y redirige al activity del login
+// Borra las variables globales, el stack de activities y redirige al activity del login
     public void cerrarSesion(View view){
         ((GlobalVariables) this.getApplication()).setSesion_iniciada(false); //Deja la variable global sesion_iniciada en false
         ((GlobalVariables) this.getApplication()).setAlumno(null);//Borra al alumno que estaba logeado
