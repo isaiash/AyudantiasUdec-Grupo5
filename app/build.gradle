@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.jdom:jdom2:2.0.6'
     implementation 'com.github.jakebonk:ChipView:1.0.1'
     implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.facebook.android:facebook-login:[4,5)'
     implementation group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
