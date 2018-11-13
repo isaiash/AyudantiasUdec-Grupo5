@@ -1,10 +1,13 @@
 package ayudec.ayudec;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,7 +35,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String usuario = ((EditText) findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
-                _alumno = new Alumno("", usuario, password, "", "");
+                _alumno = new Alumno("", usuario, password, "", "", 0);
 
 
                 _pDialog = new ProgressDialog(Login.this);
@@ -41,7 +44,9 @@ public class Login extends AppCompatActivity {
                 _pDialog.setMax(100);
                 _pDialog.show();
 
-                _cb = new ControladorBase(_alumno,Login.this);
+                _cb = new ControladorBase();
+                _cb.set_alumno(_alumno);
+                _cb.setLogin(Login.this);
                 _cb.setTipo(1);
                 _cb.ejecutar();
             }
