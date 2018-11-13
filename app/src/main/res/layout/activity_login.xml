@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_loginbg"
     android:gravity="center_horizontal"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@android:color/holo_blue_dark">
+    android:paddingBottom="@dimen/activity_vertical_margin">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,16 +32,17 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/text_ayudec"
                     android:textColor="@android:color/white"
-                    android:textSize="36sp"
-                    android:textStyle="bold" />
+                    android:textSize="36sp" />
 
                 <TextView
                     android:id="@+id/subtitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/text_login"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/darker_gray"
                     android:textSize="18sp" />
 
                 <Space
@@ -72,8 +72,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="@string/text_usuario"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp"
+                        android:textColor="@color/com_facebook_button_background_color_disabled"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <Space
@@ -104,18 +104,18 @@
                         android:layout_width="100dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:inputType="textPersonName"
+                        android:inputType="textEmailAddress"
                         android:textColor="@android:color/white"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/udec-cl"
-                        android:layout_width="90dp"
+                        android:layout_width="85dp"
                         android:layout_height="50dp"
                         android:gravity="center"
                         android:text="@string/correo_direccion"
                         android:textColor="?android:attr/colorPressedHighlight"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <Space
@@ -148,8 +148,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/contrase_a"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp"
+                        android:textColor="@color/com_facebook_button_background_color_disabled"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <Space
@@ -173,7 +173,7 @@
                     android:layout_gravity="center"
                     android:inputType="textPassword"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -187,14 +187,15 @@
 
                 <Button
                     android:id="@+id/iniciar-sesion"
+                    style="@style/LoginButton"
                     android:layout_width="170dp"
-                    android:layout_height="34dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="?android:attr/colorPressedHighlight"
+                    android:background="@drawable/login_button"
                     android:text="@string/iniciar_sesion"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>

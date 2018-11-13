@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         if(!((GlobalVariables)this.getApplication()).getSesion_iniciada()){
-            Toast.makeText(this, "Deslggeado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Deslogeado", Toast.LENGTH_SHORT).show();
             Intent login = new Intent(HomeActivity.this,Login.class);
             startActivity(login);
         }
@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
         //ayudantias = crearAyudantias();
 
         gridView = (GridView) findViewById(R.id.gridview);
-
 
         // Llama al controlador para que se encargue de llenar la grilla con los datos de la base
         callController();
