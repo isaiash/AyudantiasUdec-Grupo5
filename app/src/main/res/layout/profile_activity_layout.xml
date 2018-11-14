@@ -7,7 +7,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/principal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Nombre"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/userCar"
@@ -62,9 +63,13 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayoutHor"
+                android:id="@+id/linearLayoutHorCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayoutRes">
 
@@ -72,127 +77,163 @@
                     android:id="@+id/userHor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
                     android:layout_weight="1"
                     android:text="Disponibilidad Horaria"
+                    android:textStyle="bold"
                     tools:text="Disponibilidad Horaria" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_weight="1"
-                        android:text="Marca horarios disponibles"
-                        android:textColor="@android:color/black" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="24dp"
-                        android:background="@android:drawable/screen_background_light_transparent"
-                        android:tint="@android:color/holo_blue_light"
-                        app:srcCompat="@android:drawable/ic_menu_my_calendar"
-                        tools:background="@android:color/transparent"
-                        tools:tint="@android:color/holo_blue_dark" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayoutEsp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutHor">
-
                 <TextView
-                    android:id="@+id/userEsp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_weight="1"
-                    android:text="Especialidades"
-                    tools:text="Especialidades" />
-
-                <LinearLayout
+                    android:id="@+id/toHorario"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <com.allyants.chipview.ChipView
-                        android:id="@+id/especView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_weight="1"
-
-                        android:textColor="@android:color/black" />
-
-                    <ImageButton
-                        android:id="@+id/btnEditEspec"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="24dp"
-                        android:background="@android:color/transparent"
-                        android:tint="@android:color/holo_blue_light"
-                        app:srcCompat="@android:drawable/ic_menu_edit"
-                        tools:background="@android:color/transparent"
-                        tools:tint="@android:color/holo_blue_dark" />
-                </LinearLayout>
-
+                    android:onClick="ToHorario"
+                    android:text="Marca tus horarios disponibles..."
+                    android:textColor="@android:color/holo_blue_dark" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayoutSocial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutEsp">
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/userSocial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
-                    android:text="Conectar con redes sociales" />
+                    android:text="Contacto"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/correoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutRes">
+
+                    <TextView
+                        android:id="@+id/userEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Correo electrónico" />
+
+                    <TextView
+                        android:id="@+id/mailDisplay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_weight="1"
+                        android:text="Presiona para ingresar un correo electrónico"
+                        android:textColor="@android:color/holo_blue_dark" />
+
+                    <EditText
+                        android:id="@+id/correoInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Ingresa correo electrónico"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fonoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutRes">
+
+                    <TextView
+                        android:id="@+id/nroTelefono"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Número de teléfono" />
+
+                    <TextView
+                        android:id="@+id/phoneDisplay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_weight="1"
+                        android:text="Presiona para ingresar un número de contacto"
+                        android:textColor="@android:color/holo_blue_dark" />
+
+                    <EditText
+                        android:id="@+id/fonoInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Ingresa número telefónico"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/redesSocialesView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="1"
+                    android:text="Redes Sociales" />
 
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
                     android:layout_weight="1">
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp">
 
                         <ImageButton
                             android:id="@+id/imageButton2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_marginHorizontal="16dp"
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
-                            app:srcCompat="@android:drawable/ic_menu_report_image" />
+                            app:srcCompat="@drawable/com_facebook_favicon_blue" />
 
                         <TextView
                             android:id="@+id/textView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="12"
-                            android:text="Facebook"
-                            android:textColor="@android:color/black" />
+                            android:text="Facebook" />
 
                         <Switch
                             android:id="@+id/facebookConn"
@@ -205,39 +246,14 @@
                     </TableRow>
 
                     <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_width="165dp"
+                        android:layout_height="match_parent">
 
-                        <ImageButton
-                            android:id="@+id/instaIcon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_weight="1"
-                            android:background="@android:color/transparent"
-                            app:srcCompat="@android:drawable/ic_menu_report_image" />
-
-                        <TextView
-                            android:id="@+id/instaText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="12"
-                            android:text="Instagram"
-                            android:textColor="@android:color/black" />
-
-                        <Switch
-                            android:id="@+id/instagramConn"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_weight="1"
-                            android:text="Mostrar"
-                            android:textColor="@android:color/darker_gray" />
                     </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent">
 
                         <ImageButton
                             android:id="@+id/wspIcon"
@@ -246,15 +262,14 @@
                             android:layout_marginHorizontal="16dp"
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
-                            app:srcCompat="@android:drawable/ic_menu_report_image" />
+                            app:srcCompat="@drawable/ic_menu_share" />
 
                         <TextView
                             android:id="@+id/wspText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="12"
-                            android:text="WhatsApp"
-                            android:textColor="@android:color/black" />
+                            android:text="WhatsApp" />
 
                         <Switch
                             android:id="@+id/wspConn"
@@ -266,51 +281,62 @@
                             android:textColor="@android:color/darker_gray" />
                     </TableRow>
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+
                 </TableLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayoutAcc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayoutSocial">
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
+
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
 
                 <TextView
                     android:id="@+id/accOptions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
                     android:layout_weight="1"
-                    android:text="Cuenta" />
+                    android:text="Cuenta"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/accLogout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="4dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
+                    android:onClick="cerrarSesion"
                     android:text="Cerrar Sesión"
                     android:textColor="@android:color/holo_red_light"
-                    android:textStyle="bold"
-                    app:srcCompat="@android:drawable/ic_lock_power_off"/>
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/accDelete"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:text="Eliminar Cuenta"
-                    android:textColor="@android:color/holo_red_dark" />
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textStyle="bold"
+                    app:srcCompat="@android:drawable/ic_lock_power_off" />
             </LinearLayout>
+
         </LinearLayout>
+
 
     </ScrollView>
 

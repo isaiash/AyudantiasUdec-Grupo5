@@ -1,15 +1,17 @@
 package ayudec.ayudec;
 
 public class Alumno {
-    
-    private String _nombre, _user, _password, _matricula;
 
-    public Alumno(String nombre, String user, String password, String matricula){
+    private String _nombre, _user, _password, _matricula, _carrera, _correo, _telefono;
+    private int _horario;
+
+    public Alumno(String nombre, String user, String password, String matricula, String carrera, int horario){
         _nombre = nombre;
         _user = user;
         _password = password;
         _matricula = matricula;
-
+        _carrera = carrera;
+        _horario = horario;
     }
 
     public String get_nombre() {
@@ -42,5 +44,37 @@ public class Alumno {
 
     public void set_matricula(String _matricula) {
         this._matricula = _matricula;
+    }
+
+    public String get_carrera() {
+        return _carrera;
+    }
+
+    public void set_carrera(String _carrera) {
+        this._carrera = _carrera;
+    }
+
+    public int get_horario() {
+        return _horario;
+    }
+
+    public void set_horario(int _horario) {
+        this._horario= _horario;
+    }
+
+    public String get_correo() {
+        return _correo;
+    }
+
+    public void set_correo(String _correo) {
+        this._correo = _correo;
+    }
+
+    public String get_telefono() {
+        return _telefono;
+    }
+
+    public void set_telefono(String _telefono) {
+        this._telefono = _telefono;
     }
 }
