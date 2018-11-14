@@ -38,10 +38,14 @@ public class ProfileActivity extends AppCompatActivity {
     String defCorreoText = "Presiona para ingresar un correo electrónico...";
     String defFonoText = "Presiona para ingresar un número telefónico...";
     CallbackManager callbackManager;
+    private LocalDBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        db = new LocalDBHelper(this);
+
         setContentView(R.layout.profile_activity_layout);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -232,6 +236,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void cerrarSesion(View view){
         ((GlobalVariables) this.getApplication()).setSesion_iniciada(false); //Deja la variable global sesion_iniciada en false
         ((GlobalVariables) this.getApplication()).setAlumno(null);//Borra al alumno que estaba logeado
+        db.closeSession();
         Intent login = new Intent(ProfileActivity.this, Login.class);
         login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); //borra el stack de actividades
         Toast.makeText(getApplicationContext(), "Cerrando sesion ",Toast.LENGTH_SHORT).show();
