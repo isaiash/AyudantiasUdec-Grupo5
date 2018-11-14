@@ -78,7 +78,7 @@ public class NuevaAyudantia extends AppCompatActivity {
         ControladorBase _cb = new ControladorBase();
         _pDialog = new ProgressDialog(NuevaAyudantia.this);
         _pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        _pDialog.setMessage("Creando ayudantía . . . ");
+        _pDialog.setMessage("Creando ayudantía ... ");
         _pDialog.setMax(100);
         _pDialog.show();
         _cb.setAyudantia(aux);

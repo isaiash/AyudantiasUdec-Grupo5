@@ -106,7 +106,7 @@ public class HomeActivity extends AppCompatActivity {
         ControladorBase _cb = new ControladorBase();
         _pDialog = new ProgressDialog(HomeActivity.this);
         _pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        _pDialog.setMessage("Loading");
+        _pDialog.setMessage("Cargando ayudantías ...");
         _pDialog.setMax(100);
         _pDialog.show();
         _cb.setHome(HomeActivity.this);
@@ -139,6 +139,11 @@ public class HomeActivity extends AppCompatActivity {
         _pDialog.dismiss();
     }
 
+    public void noHay(){
+        Toast.makeText(HomeActivity.this, "No tiene ayudantias disponibles." ,Toast.LENGTH_SHORT).show();
+        _pDialog.dismiss();
+    }
+
     // Método llamado por el botón (+)
     // Va a la activity de crear ayudantia
     public void addAyudantia(View view){
@@ -150,6 +155,9 @@ public class HomeActivity extends AppCompatActivity {
     // Va al chat
     public void sendAlgo(View view){
         Toast.makeText(HomeActivity.this,"Se apretó botón de chat.",Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(HomeActivity.this, Chat.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     // Va al profile

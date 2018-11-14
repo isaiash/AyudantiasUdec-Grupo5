@@ -30,7 +30,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
 
     private int tipo, estado;
 
-    private boolean conectado = false, entro = false;
+    private boolean conectado = false, entro = false, hay=false;
 
     ResultSet rs;
 
@@ -117,6 +117,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
 
 
                             Log.d("query2", query);
+                            Log.d("entro", String.valueOf(entro));
                             c = DriverManager.getConnection("jdbc:postgresql://plop.inf.udec.cl:5432/karleyparada/ayudantia_udec", "karleyparada", "karley.123");
                             c.setAutoCommit(false);
                             stmt = c.createStatement();
@@ -126,6 +127,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                             entro = false;
                             while (rs.next()) {
                                 entro = true;
+                                hay = true;
                                 Log.d("query2", rs.getString(1));
                                 // String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating
                                 // select asignatura.nombre, ayudante.carrera, asignatura.nombre, sala.id_sala, sala.horario, ayudantia.capacidad
@@ -136,10 +138,6 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                             if(ayudantias_arraylist.size() > 0){
                                 this.ayudantias = new Ayudantia[ayudantias_arraylist.size()];
                                 ayudantias = ayudantias_arraylist.toArray(ayudantias);
-
-                            }
-                            else{
-                                entro = false;
                             }
                         }
                         stmt.close();
@@ -215,7 +213,13 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                 else _login.negarEntrada();
                 break;
             case 2:
-                if (entro) homeActivity.setAyudantias(ayudantias);
+                if (entro) {
+                    if (hay) homeActivity.setAyudantias(ayudantias);
+                    else homeActivity.noHay();
+                }
+                else{
+                    homeActivity.noHay();
+                }
                 break;
             case 3:
                 if (entro) {
