@@ -30,7 +30,8 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
 
     private int tipo, estado;
 
-    private boolean conectado = false, entro = false;
+    private boolean conectado = false;
+    private boolean entro = false;
 
     ResultSet rs;
 
@@ -78,7 +79,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                         rs = stmt.executeQuery(query);
 
                         entro = false;
-                        //System.out.println("+++" + rs.first()); // comente esta wea
+                        //System.out.println("+++" + rs.first()); // comente esto
                         while (rs.next()) {
                             entro = true;
                             Log.e("validado", "usuario encontrado");
@@ -271,4 +272,9 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
     public void setNueva(NuevaAyudantia nueva){
         this.nuevaAyudantia = nueva;
     }
+
+    public String getQuery() { return query; }
+
+    public boolean isConectado() { return conectado; }
+
 }
