@@ -1,10 +1,13 @@
 package ayudec.ayudec;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -58,6 +61,22 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
         Date d = new Date(codigoHora);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");//a pm o am
         holder.getHora().setText(sdf.format(d));
+
+        // ESTA WEA EN ADELANTE
+        Alumno _alumno = ((GlobalVariables) ((Activity)c).getApplication()).getAlumno();
+        if(listMensaje.get(position).getNombre().equals(_alumno.get_nombre())) {
+            Log.d("DATOS:", "--" + listMensaje.get(position).getNombre() + "---" + _alumno.get_nombre()+"---");
+            View layout =  holder.getView();
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) layout.getLayoutParams();
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, 1);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 1);
+            holder.getView().setLayoutParams(layoutParams);
+        }
+        else{
+            Log.d("DATOS:", "TUDO BEM MANO " + listMensaje.get(position).getMensaje());
+            Log.d("DATOS:", "--" + listMensaje.get(position).getNombre() + "---" + _alumno.get_nombre()+"---");
+            Log.d("MENSAJE:",  listMensaje.get(position).getMensaje());
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ayudec.ayudec;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,14 +19,20 @@ public class HolderMensaje extends RecyclerView.ViewHolder {
     private TextView hora;
     private CircleImageView fotoMensajePerfil;
     private ImageView fotoMensaje;
-
+    // Lo relacionado a esta wea
+    private CardView view;
     public HolderMensaje(View itemView) {
         super(itemView);
+        this.view = (CardView)itemView.findViewById(R.id.card_view);
         nombre = (TextView) itemView.findViewById(R.id.nombreMensaje);
         mensaje = (TextView) itemView.findViewById(R.id.mensajeMensaje);
         hora = (TextView) itemView.findViewById(R.id.horaMensaje);
         fotoMensajePerfil = (CircleImageView) itemView.findViewById(R.id.fotoPerfilMensaje);
         fotoMensaje = (ImageView) itemView.findViewById(R.id.mensajeFoto);
+    }
+
+    public CardView getView(){
+        return view;
     }
 
     public TextView getNombre() {
