@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
 
     private Ayudantia[] ayudantias;
-    private Alumno _alumno;
     private GridView gridView;
 
     @SuppressLint("ClickableViewAccessibility")
