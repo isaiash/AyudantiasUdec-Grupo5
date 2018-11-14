@@ -136,6 +136,7 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(HomeActivity.this,"Se apretó botón de chat.",Toast.LENGTH_SHORT).show();
         Intent i = new Intent(HomeActivity.this, Chat.class);
         startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
     public void ToProfile(View view){
