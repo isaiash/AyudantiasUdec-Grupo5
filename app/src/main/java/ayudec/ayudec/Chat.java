@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.CallbackManager;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -44,14 +45,18 @@ public class Chat extends AppCompatActivity {
     private static final int PHOTO_SEND = 1;
     private static final int PHOTO_PERFIL = 2;
     private String fotoPerfilCadena;
-
+    private Alumno _alumno;
+    private CallbackManager callbackManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        callbackManager = CallbackManager.Factory.create();
+        _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
+        ((TextView)findViewById(R.id.nombreChat)).setText(_alumno.get_nombre());
         fotoPerfil = (CircleImageView) findViewById(R.id.fotoPerfil);
-        nombre = (TextView) findViewById(R.id.nombre);
+        nombre = (TextView) findViewById(R.id.nombreChat);
         rvMensajes = (RecyclerView) findViewById(R.id.rvMensajes);
         txtMensaje = (EditText) findViewById(R.id.txtMensaje);
         btnEnviar = (Button) findViewById(R.id.btnEnviar);
