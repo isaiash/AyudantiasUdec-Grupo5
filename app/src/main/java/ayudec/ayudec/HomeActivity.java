@@ -135,6 +135,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void sendAlgo(View view){
         Toast.makeText(HomeActivity.this,"Se apretó botón de chat.",Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(HomeActivity.this, Chat.class);
+        startActivity(i);
     }
 
     public void ToProfile(View view){
