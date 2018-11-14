@@ -153,8 +153,8 @@ public class Chat extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     //Uri u = taskSnapshot.getDownloadUrl();
-                    Uri u = taskSnapshot.getUploadSessionUri();
-                    MensajeEnviar m = new MensajeEnviar("Kevin te ha enviado una foto",u.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
+                    Uri u = taskSnapshot.getStorage().getDownloadUrl().getResult();
+                    MensajeEnviar m = new MensajeEnviar(_alumno.get_nombre() + " te ha enviado una foto",u.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                 }
             });
@@ -166,9 +166,11 @@ public class Chat extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     //Uri u = taskSnapshot.getDownloadUrl();
-                    Uri u = taskSnapshot.getUploadSessionUri();
+                    Uri u = taskSnapshot.getStorage().getDownloadUrl().getResult();
+
+
                     fotoPerfilCadena = u.toString();
-                    MensajeEnviar m = new MensajeEnviar("Kevin ha actualizado su foto de perfil",u.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
+                    MensajeEnviar m = new MensajeEnviar(_alumno.get_nombre() + " ha actualizado su foto de perfil",u.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                     Glide.with(Chat.this).load(u.toString()).into(fotoPerfil);
                 }
