@@ -65,20 +65,20 @@ public class ProfileActivity extends AppCompatActivity {
         _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
 
         // Obtiene el correo del alumno desde la BD
-        String correoEnBase = _alumno.get_correo();
-        correoElectText.setText(correoEnBase);
+
+        //correoElectText.setText(correoEnBase);
+        if (_alumno.get_correo()==null){
+            Toast.makeText(this, _alumno.get_user()+"@udec.cl", Toast.LENGTH_SHORT).show();
+            correoElectText.setText(_alumno.get_user()+"@udec.cl");
+        } else
+            correoElectText.setText(_alumno.get_correo());
 
         // Obtiene el teléfono del alumno desde la BD
         String fonoEnBase = _alumno.get_telefono();
-        fonoText.setText(fonoEnBase);
-        //Mostrar correo en la actividad
-        if (correoEnBase != null) {
-            correoElectText.setText(correoEnBase);
-        }
-        //Mostrar fono en la actividad
-        if (fonoEnBase != null) {
+        if (_alumno.get_telefono()== null){
+            fonoText.setText(defFonoText);
+        } else
             fonoText.setText(fonoEnBase);
-        }
 
         ((TextView)findViewById(R.id.userName)).setText(_alumno.get_nombre());
 
@@ -134,6 +134,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        final String finalCorreoEnBase = _alumno.get_correo();
         inputCorreo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -141,6 +142,12 @@ public class ProfileActivity extends AppCompatActivity {
                     inputCorreo.setVisibility(View.GONE);
                     inputCorreo.clearFocus();
                     correoElectText.setVisibility(View.VISIBLE);
+                } else {
+                    if (correoElectText.getText().toString()!= finalCorreoEnBase){
+                        inputCorreo.setText(correoElectText.getText().toString());
+                        inputCorreo.setVisibility(View.VISIBLE);
+                        correoElectText.setVisibility(View.GONE);
+                    }
                 }
             }
         });
@@ -190,6 +197,12 @@ public class ProfileActivity extends AppCompatActivity {
                     inputFono.setVisibility(View.GONE);
                     inputFono.clearFocus();
                     fonoText.setVisibility(View.VISIBLE);
+                } else {
+                    if (fonoText.getText().toString()!=defFonoText){
+                        inputFono.setText(fonoText.getText().toString());
+                        inputFono.setVisibility(View.VISIBLE);
+                        fonoText.setVisibility(View.GONE);
+                    }
                 }
             }
         });
