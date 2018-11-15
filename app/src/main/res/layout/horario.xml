@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -79,109 +80,125 @@
         </LinearLayout>
 
         <TableRow
-            android:background="#000000"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#000000">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="  "
                 android:layout_column="0"
                 android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="  "
                 android:textStyle="bold"
-                android:gravity="center" />
+                />
 
             <TextView
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="center"
                 android:text=" Lun "
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@android:color/white"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="center"
                 android:text=" Mar "
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@android:color/white"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="center"
                 android:text=" Mie "
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@android:color/white"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
+                android:background="@android:color/white"
+                android:gravity="center"
                 android:text=" Jue "
-                android:textStyle="bold"
-                android:gravity="center"
-                android:background="@android:color/white"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text=" Vie "
-                android:textStyle="bold"
+                android:background="@android:color/white"
                 android:gravity="center"
-                android:background="@android:color/white"/>
+                android:text=" Vie "
+                android:textStyle="bold" />
         </TableRow>
 
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
+
         <TableRow
-            android:background="#000000"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="#000000"
+            android:showDividers="beginning|middle|end">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text=" 08:00 "
                 android:layout_column="0"
                 android:background="#FFFFFF"
-                android:textStyle="bold"
-                android:gravity="center" />
+                android:gravity="center"
+                android:text=" 08:00 "
+                android:textStyle="bold" />
+
             <Button
                 android:id="@+id/button0"
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@android:color/white"/>
+                android:background="@android:color/white" />
             <Button
                 android:id="@+id/button13"
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@android:color/white"/>
+                android:background="@android:color/white" />
+
             <Button
                 android:id="@+id/button26"
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@android:color/white"/>
+                android:background="@android:color/white" />
+
             <Button
                 android:id="@+id/button39"
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@android:color/white"/>
+                android:background="@android:color/white" />
+
             <Button
                 android:id="@+id/button52"
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@android:color/white"/>
+                android:background="@android:color/white" />
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -232,6 +249,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -282,6 +303,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -332,6 +357,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -382,6 +411,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -432,6 +465,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -482,6 +519,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -532,6 +573,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -582,6 +627,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -632,6 +681,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -682,6 +735,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
@@ -732,6 +789,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/white"/>
         </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray" />
         <TableRow
             android:background="#000000"
             android:layout_width="fill_parent"
