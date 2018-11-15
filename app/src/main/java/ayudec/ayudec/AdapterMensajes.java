@@ -3,6 +3,7 @@ package ayudec.ayudec;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,15 +70,16 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
         if(mensaje.getNombre().equals(_alumno.get_nombre())) {
             Log.d("DATOS:", "--" + mensaje.getNombre() + "---" + _alumno.get_nombre()+"---");
             View layout =  holder.getView();
+            CardView card = (CardView) layout.findViewById(R.id.card_view);
+            card.setCardBackgroundColor(Color.LTGRAY);
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) layout.getLayoutParams();
-            layout.setBackgroundColor(Color.LTGRAY);
+            //layout.setBackgroundColor(Color.LTGRAY);
             //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             holder.getView().setLayoutParams(layoutParams);
         }
         else{
             View layout =  holder.getView();
-            layout.setBackgroundColor(Color.WHITE);
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) layout.getLayoutParams();
             //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);

@@ -82,7 +82,7 @@ public class Chat extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         //databaseReference = database.getReference("chat");//Sala de chat (nombre)
         String idSala = this.getIntent().getExtras().getString("idAyudantia");
-        if(idSala!=null) databaseReference = database.getReference("idSala");//Sala de chat (nombre)
+        if(idSala!=null) databaseReference = database.getReference(idSala);//Sala de chat (nombre)
         else databaseReference = database.getReference("chat");//Sala de chat (nombre)
 
 
