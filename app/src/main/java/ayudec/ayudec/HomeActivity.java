@@ -116,20 +116,30 @@ public class HomeActivity extends AppCompatActivity {
     public void setAyudantias(final Ayudantia[] listaAyudantias){
 
         this.ayudantias = listaAyudantias;
-
+        GlobalVariables app = (GlobalVariables) getApplication();
+        final Alumno current = app.getAlumno();
         CustomAdapter ca = new CustomAdapter(this, this.ayudantias);
         gridView.setAdapter(ca);
+        final ControladorBase _cb = new ControladorBase();
+        _cb.setHome(HomeActivity.this);
+        _cb.set_alumno(current);
+        _cb.setTipo(6);
 
         // Se agrega el Listener
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-
-                String ramo = ayudantias[position].getRamo();
-                String ayudante = ayudantias[position].getNombre();
-                Toast.makeText(HomeActivity.this, " Ayudantia: " + ramo + " Ayudante: " + ayudante,
-                        Toast.LENGTH_SHORT).show();
-
+                String id_ayudantia = ayudantias[position].getId_ayudantia();
+                if(!ayudantias[position].getInscrito()) {
+                    Log.d("inscribiendo", current.get_nombre());
+                    Toast.makeText(HomeActivity.this, "puede inscribir", Toast.LENGTH_SHORT).show();
+                    _cb.setAyudantia(ayudantias[position]);
+                    _cb.ejecutar();
+                    callController();
+                }
+                else{
+                    Toast.makeText(HomeActivity.this, "ya está inscrito " + ayudantias[position].getId_ayudantia(), Toast.LENGTH_SHORT).show();
+                }
             }
 
         });

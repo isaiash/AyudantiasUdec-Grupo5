@@ -73,7 +73,7 @@ public class NuevaAyudantia extends AppCompatActivity {
         String horario = _horario.getText().toString();
         GlobalVariables app = (GlobalVariables) getApplication();
         Alumno current = app.getAlumno();
-        Ayudantia aux = new Ayudantia(current.get_matricula(), "", asignatura, "", sala, cupos,"", "");
+        Ayudantia aux = new Ayudantia("", current.get_matricula(), "", asignatura, "", sala,cupos, "", "", false, "");
         ControladorBase _cb = new ControladorBase();
         _pDialog = new ProgressDialog(NuevaAyudantia.this);
         _pDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);

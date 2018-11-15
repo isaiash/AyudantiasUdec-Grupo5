@@ -82,8 +82,9 @@ public class CustomAdapter extends BaseAdapter {
         // Se le pone los cupos a la textview
         TextView cupos_tv = (TextView) myView.findViewById(R.id.cupos_tv);
         String cupos = ayudantias[position].getCupos();
-        cupos_tv.setText("0/" + cupos);
-        cupos_tv.setTextColor(Color.parseColor("#2A9267"));
+        String current_cupos = ayudantias[position].getCurrent_cupos();
+        cupos_tv.setText(current_cupos + "/" + cupos);
+        cupos_tv.setTextColor(setColor(current_cupos));
 
         // Se le pone la carrera a la textview
         TextView carrera_tv = (TextView) myView.findViewById(R.id.ayudante_carrera);
@@ -95,11 +96,24 @@ public class CustomAdapter extends BaseAdapter {
         ImageView ayudante_iv = (ImageView) myView.findViewById(R.id.ayudante_imagen);
         ayudante_iv.setImageResource(R.drawable.icono);
 
+        TextView inscrito_tv = (TextView) myView.findViewById(R.id.inscrito);
+        boolean inscrito = ayudantias[position].getInscrito();
+        if(inscrito){
+            inscrito_tv.setText("Si");
+            inscrito_tv.setTextColor(Color.parseColor("#2A9267"));
+        }
+        else{
+            inscrito_tv.setText("No");
+            inscrito_tv.setTextColor(Color.parseColor("#B20000"));
+        }
 
         // Se pone el rating (mientras por defecto se ponen las 5 estrellas siempre)
         ImageView rating_iv = (ImageView) myView.findViewById(R.id.rating_imagen);
         rating_iv.setImageResource(R.drawable.rating);
         return myView;
+
+
+
     }
 
 }

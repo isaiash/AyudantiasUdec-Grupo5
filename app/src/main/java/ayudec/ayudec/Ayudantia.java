@@ -2,9 +2,11 @@ package ayudec.ayudec;
 
 public class Ayudantia {
 
-    private String nombre_ayudante, carrera, ramo, rating, horario, sala, cupos, imagen_url;
+    private String nombre_ayudante, carrera, ramo, rating, horario, sala, cupos, imagen_url, id_ayudantia, current_cupos;
+    private boolean inscrito;
 
-    public Ayudantia(String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating){
+    public Ayudantia(String id_ayudantia, String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating, boolean inscrito, String current_cupos){
+        this.id_ayudantia = id_ayudantia;
         this.nombre_ayudante = nombre;
         this.carrera = carrera;
         this.ramo = ramo;
@@ -13,6 +15,8 @@ public class Ayudantia {
         this.cupos = cupos;
         this.rating = rating;
         this.imagen_url = imagen_url;
+        this.inscrito = inscrito;
+        this.current_cupos = current_cupos;
     }
 
     public String getNombre() {
@@ -43,7 +47,15 @@ public class Ayudantia {
         return this.cupos;
     }
 
+    public String getId_ayudantia(){ return this.id_ayudantia; }
+
     public String getImagen_url(){
         return this.imagen_url;
     }
+
+    public String getCurrent_cupos(){ return current_cupos; }
+
+    public void setInscrito(boolean value){this.inscrito = value;}
+
+    public boolean getInscrito(){ return this.inscrito; }
 }

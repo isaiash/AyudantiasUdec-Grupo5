@@ -103,7 +103,8 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                         Log.d("global variable alumno", current_alumno.get_nombre());
                         if (current_alumno != null){
                             Log.d("else", "haciendo la query");
-                            query = "SELECT ayudante.nombre, ayudante.carrera, asignatura.nombre, sala.id_sala, sala.horario, ayudantia.capacidad " +
+                            //String id_ayudantia, String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating, boolean inscrito, String current_cupos
+                            query = "SELECT ayudantia.id, ayudante.nombre, ayudante.carrera, asignatura.nombre, sala.horario, sala.id_sala,  ayudantia.capacidad, ayudantia.cantidad_actual " +
                                     "FROM ayudantia_udec.alumno, ayudantia_udec.inscribe, ayudantia_udec.pertenece, ayudantia_udec.asignatura, ayudantia_udec.sala, ayudantia_udec.alumno as ayudante, ayudantia_udec.estudia, ayudantia_udec.ayudantia, ayudantia_udec.pide " +
                                     "WHERE alumno.matricula = " + current_alumno.get_matricula() + " and " +
                                     "inscribe.matricula = alumno.matricula and " +
@@ -131,13 +132,27 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                 entro = true;
                                 hay = true;
                                 Log.d("query2", rs.getString(1));
-                                // String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating
-                                // select asignatura.nombre, ayudante.carrera, asignatura.nombre, sala.id_sala, sala.horario, ayudantia.capacidad
-                                Ayudantia aux = new Ayudantia(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(6), "","");
+                                // String id_ayudantia, String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating, boolean inscrito, String current_cupos
+                                // select asignatura.id, asignatura.nombre, ayudante.carrera, asignatura.nombre, sala.horario, sala.id_sala ayudantia.capacidad
+                                Ayudantia aux = new Ayudantia(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), rs.getString(7),"","", false, rs.getString(8));
                                 Log.d("cupos",aux.getCupos());
                                 ayudantias_arraylist.add(aux);
                             }
                             if(ayudantias_arraylist.size() > 0){
+                                for(int i = 0; i < ayudantias_arraylist.size(); i++){
+                                    query = "SELECT ayudantia_udec.ayudantia.id " +
+                                            "from ayudantia_udec.alumno, ayudantia_udec.pertenece, ayudantia_udec.ayudantia " +
+                                            "where alumno.matricula = " + current_alumno.get_matricula() + " and " +
+                                            "pertenece.id_ayudantia = ayudantia.id and " +
+                                            "alumno.matricula = pertenece.matricula and " +
+                                            "ayudantia.id = " + ayudantias_arraylist.get(i).getId_ayudantia() + " and " +
+                                            "pertenece.ayudante = false;";
+                                    stmt = c.createStatement();
+                                    rs = stmt.executeQuery(query);
+                                    while(rs.next()){
+                                        ayudantias_arraylist.get(i).setInscrito(true);
+                                    }
+                                }
                                 this.ayudantias = new Ayudantia[ayudantias_arraylist.size()];
                                 ayudantias = ayudantias_arraylist.toArray(ayudantias);
                             }
@@ -178,8 +193,10 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                         break;
                     case 4:
                         Log.d("case 4", "entré al case 4");
-                        Log.d("case4", ayudantia.getNombre());
+                        Log.d("case 4", ayudantia.getNombre());
                         Log.d("case 4", ayudantia.getCupos());
+                        Log.d("case 4", ayudantia.getSala());
+                        Log.d("case 4", ayudantia.getRamo());
                         int matricula = Integer.parseInt(ayudantia.getNombre());
                         int cupos = Integer.parseInt((ayudantia.getCupos()));
                         //query = "SELECT \"crearayudantia\" (" + this.ayudantia.getNombre() + ",'" + this.ayudantia.getSala() +"', '" + this.ayudantia.getRamo() + "',"+ this.ayudantia.getCupos() + ");";
@@ -211,6 +228,20 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                         c.commit();
                         c.close();
                         Log.e("case 5", "horario insertado");
+                        break;
+                    // inscribir ayudantia
+                    case 6:
+                        c = DriverManager.getConnection("jdbc:postgresql://plop.inf.udec.cl:5432/karleyparada/ayudantia_udec", "karleyparada", "karley.123");
+                        c.setAutoCommit(false);
+                        int matriculax = Integer.parseInt(this._alumno.get_matricula());
+                        int ayudantia_id = Integer.parseInt(this.ayudantia.getId_ayudantia());
+                        CallableStatement upperProc3 = c.prepareCall("{ call ayudantia_udec.inscribirayudantia(?,?) }");
+                        upperProc3.setInt(1, matriculax);
+                        upperProc3.setInt(2, ayudantia_id);
+                        upperProc3.execute();
+                        entro = true;
+                        c.commit();
+                        c.close();
                         break;
                 }
 
