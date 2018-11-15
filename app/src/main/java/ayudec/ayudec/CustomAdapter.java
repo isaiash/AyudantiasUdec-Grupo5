@@ -135,7 +135,7 @@ public class CustomAdapter extends BaseAdapter {
             public boolean onLongClick(View v) {
                 if(ayudantias[position].getInscrito()){
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                    builder1.setMessage("¿ Desea desinscribirse de la ayudantía ?");
+                    builder1.setMessage("¿ Desea desinscribirse de " + ayudantias[position].getRamo() + " ?");
                     builder1.setCancelable(true);
 
                     builder1.setPositiveButton(
