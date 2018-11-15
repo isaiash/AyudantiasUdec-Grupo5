@@ -127,6 +127,8 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                             rs = stmt.executeQuery(query);
                             // nuevo array list donde guardar las ayudantias creadas a partir del query
                             ArrayList<Ayudantia> ayudantias_arraylist = new ArrayList<Ayudantia>();
+                            ArrayList<Ayudantia> ayudantias_disponibles = new ArrayList<Ayudantia>();
+                            ArrayList<Ayudantia> ayudantias_tomadas = new ArrayList<Ayudantia>();
                             entro = false;
                             while (rs.next()) {
                                 entro = true;
@@ -152,9 +154,21 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                     while(rs.next()){
                                         ayudantias_arraylist.get(i).setInscrito(true);
                                     }
+                                    if(ayudantias_arraylist.get(i).getInscrito()){
+                                        ayudantias_tomadas.add(ayudantias_arraylist.get(i));
+                                    }
+                                    else{
+                                        ayudantias_disponibles.add(ayudantias_arraylist.get(i));
+                                    }
                                 }
-                                this.ayudantias = new Ayudantia[ayudantias_arraylist.size()];
-                                ayudantias = ayudantias_arraylist.toArray(ayudantias);
+
+                                ArrayList<Ayudantia> finalArrayList = new ArrayList<Ayudantia>();
+
+                                finalArrayList.addAll(ayudantias_tomadas);
+                                finalArrayList.addAll(ayudantias_disponibles);
+
+                                this.ayudantias = new Ayudantia[finalArrayList.size()];
+                                ayudantias = finalArrayList.toArray(ayudantias);
                             }
                         }
                         stmt.close();

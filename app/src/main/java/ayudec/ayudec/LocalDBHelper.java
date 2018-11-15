@@ -14,7 +14,7 @@ public class LocalDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "logged.db";
     public static final String TABLE_NAME = "alumno";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
 
 
     public LocalDBHelper(Context context){
@@ -24,7 +24,7 @@ public class LocalDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
-                "CREATE TABLE " + TABLE_NAME + " (matricula varchar(50) primary key, nombre varchar(100), carrera varchar(100))"
+                "CREATE TABLE " + TABLE_NAME + " (matricula varchar(50) primary key, usuario varchar(100), nombre varchar(100), carrera varchar(100))"
         );
     }
 
@@ -41,6 +41,7 @@ public class LocalDBHelper extends SQLiteOpenHelper {
         Log.d("LOCAL_DB",alumno.get_matricula());
         ContentValues values = new ContentValues();
         values.put("matricula", alumno.get_matricula());
+        values.put("usuario", alumno.get_user());
         values.put("nombre", alumno.get_nombre());
         values.put("carrera", alumno.get_carrera());
         db.insert(TABLE_NAME, null, values);
@@ -64,10 +65,12 @@ public class LocalDBHelper extends SQLiteOpenHelper {
 
     public Alumno getConnected(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME,null);
+        Cursor cursor = db.rawQuery("SELECT matricula, usuario, nombre, carrera  FROM " + TABLE_NAME,null);
         Alumno alumno = null;
         while(cursor.moveToNext()){
-            alumno = new Alumno(cursor.getString(1),"","",cursor.getString(0), cursor.getString(2), BigInteger.valueOf(0));
+            Log.d("alumnox", cursor.getString(1));
+            Log.d("alumnox", cursor.getString(0));
+            alumno = new Alumno(cursor.getString(2),cursor.getString(1),"",cursor.getString(0), cursor.getString(3), BigInteger.valueOf(0));
         }
         cursor.close();
         db.close();

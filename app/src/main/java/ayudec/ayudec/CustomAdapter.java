@@ -203,6 +203,31 @@ public class CustomAdapter extends BaseAdapter {
             }
         });
 
+        /*
+        myView.setOnTouchListener(new OnSwipeTouchListener(homeActivity) {
+            @Override
+            public void onSwipeRight() {
+                Intent i = new Intent(homeActivity,ProfileActivity.class);
+                homeActivity.startActivity(i);
+                homeActivity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                Intent i = new Intent(homeActivity,Chat.class);
+                homeActivity.startActivity(i);
+                homeActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+            @Override
+            public void onSwipeBottom() {
+                Toast.makeText(homeActivity,"Refrescando!",Toast.LENGTH_SHORT).show();
+                homeActivity.callController();
+                homeActivity.startActivity(homeActivity.getIntent());
+            }
+        });
+        */
+
+
         return myView;
 
     }
