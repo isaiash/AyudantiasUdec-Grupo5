@@ -2,6 +2,7 @@ package ayudec.ayudec;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,18 +65,26 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
 
         // ESTA WEA EN ADELANTE
         Alumno _alumno = ((GlobalVariables) ((Activity)c).getApplication()).getAlumno();
-        if(listMensaje.get(position).getNombre().equals(_alumno.get_nombre())) {
-            Log.d("DATOS:", "--" + listMensaje.get(position).getNombre() + "---" + _alumno.get_nombre()+"---");
+        Mensaje mensaje = listMensaje.get(position);
+        if(mensaje.getNombre().equals(_alumno.get_nombre())) {
+            Log.d("DATOS:", "--" + mensaje.getNombre() + "---" + _alumno.get_nombre()+"---");
             View layout =  holder.getView();
             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) layout.getLayoutParams();
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END, 1);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 1);
+            layout.setBackgroundColor(Color.LTGRAY);
+            //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             holder.getView().setLayoutParams(layoutParams);
         }
         else{
-            Log.d("DATOS:", "TUDO BEM MANO " + listMensaje.get(position).getMensaje());
-            Log.d("DATOS:", "--" + listMensaje.get(position).getNombre() + "---" + _alumno.get_nombre()+"---");
-            Log.d("MENSAJE:",  listMensaje.get(position).getMensaje());
+            View layout =  holder.getView();
+            layout.setBackgroundColor(Color.WHITE);
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) layout.getLayoutParams();
+            //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            holder.getView().setLayoutParams(layoutParams);
+            Log.d("DATOS:", "TUDO BEM MANO " + mensaje.getMensaje());
+            Log.d("DATOS:", "--" + mensaje.getNombre() + "---" + _alumno.get_nombre()+"---");
+            Log.d("MENSAJE:",  mensaje.getMensaje());
         }
     }
 

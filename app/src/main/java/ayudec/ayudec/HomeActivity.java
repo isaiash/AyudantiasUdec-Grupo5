@@ -127,8 +127,14 @@ public class HomeActivity extends AppCompatActivity {
 
                 String ramo = ayudantias[position].getRamo();
                 String ayudante = ayudantias[position].getNombre();
+
                 Toast.makeText(HomeActivity.this, " Ayudantia: " + ramo + " Ayudante: " + ayudante,
                         Toast.LENGTH_SHORT).show();
+
+                Intent i = new Intent(HomeActivity.this, Chat.class);
+                //i.putExtra("idAyudantia",ayudantias[position].getID());
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
             }
 
