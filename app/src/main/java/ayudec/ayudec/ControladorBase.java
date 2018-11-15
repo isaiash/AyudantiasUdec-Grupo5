@@ -109,7 +109,6 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                     "WHERE alumno.matricula = " + current_alumno.get_matricula() + " and " +
                                     "inscribe.matricula = alumno.matricula and " +
                                     "inscribe.cod_asignatura = asignatura.codigo and " +
-                                    "inscribe.semestre LIKE '%2013%' and " +
                                     "estudia.cod_asignatura = asignatura.codigo and " +
                                     "estudia.id_ayudantia = ayudantia.id and " +
                                     "pertenece.matricula = ayudante.matricula and " +
@@ -127,6 +126,7 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                             rs = stmt.executeQuery(query);
                             // nuevo array list donde guardar las ayudantias creadas a partir del query
                             ArrayList<Ayudantia> ayudantias_arraylist = new ArrayList<Ayudantia>();
+                            ArrayList<Ayudantia> mis_ayudantias = new ArrayList<Ayudantia>();
                             ArrayList<Ayudantia> ayudantias_disponibles = new ArrayList<Ayudantia>();
                             ArrayList<Ayudantia> ayudantias_tomadas = new ArrayList<Ayudantia>();
                             entro = false;
@@ -162,8 +162,37 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                     }
                                 }
 
+                                query = "SELECT ayudantia.id, ayudante.nombre, ayudante.carrera, asignatura.nombre, sala.horario, sala.id_sala,  ayudantia.capacidad, ayudantia.cantidad_actual " +
+                                        "FROM ayudantia_udec.alumno, ayudantia_udec.inscribe, ayudantia_udec.pertenece, ayudantia_udec.asignatura, ayudantia_udec.sala, ayudantia_udec.alumno as ayudante, ayudantia_udec.estudia, ayudantia_udec.ayudantia, ayudantia_udec.pide " +
+                                        "WHERE alumno.matricula = " + current_alumno.get_matricula() + " and " +
+                                        "inscribe.matricula = alumno.matricula and " +
+                                        "inscribe.cod_asignatura = asignatura.codigo and " +
+                                        "estudia.cod_asignatura = asignatura.codigo and " +
+                                        "estudia.id_ayudantia = ayudantia.id and " +
+                                        "pertenece.matricula = ayudante.matricula and " +
+                                        "pertenece.id_ayudantia = ayudantia.id and " +
+                                        "pertenece.ayudante = FALSE and " +
+                                        "pide.sala = sala.id_sala and " +
+                                        "pide.id_ayudantia = ayudantia.id;";
+
+                                entro = false;
+
+                                stmt = c.createStatement();
+                                rs = stmt.executeQuery(query);
+                                while (rs.next()) {
+                                    entro = true;
+                                    hay = true;
+                                    Log.d("query3", rs.getString(1));
+                                    // String id_ayudantia, String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating, boolean inscrito, String current_cupos
+                                    // select asignatura.id, asignatura.nombre, ayudante.carrera, asignatura.nombre, sala.horario, sala.id_sala ayudantia.capacidad
+                                    Ayudantia aux = new Ayudantia(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), rs.getString(7),"","", false, rs.getString(8));
+                                    Log.d("cupos",aux.getCupos());
+                                    mis_ayudantias.add(aux);
+                                }
+
                                 ArrayList<Ayudantia> finalArrayList = new ArrayList<Ayudantia>();
 
+                                finalArrayList.addAll(mis_ayudantias);
                                 finalArrayList.addAll(ayudantias_tomadas);
                                 finalArrayList.addAll(ayudantias_disponibles);
 

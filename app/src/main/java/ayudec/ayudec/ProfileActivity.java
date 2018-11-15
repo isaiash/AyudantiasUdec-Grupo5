@@ -64,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
 
         // Obtiene el correo del alumno desde la BD
-        String correoEnBase = _alumno.get_correo();
+        String correoEnBase = _alumno.get_user() + "@udec.cl";
 
         // Obtiene el teléfono del alumno desde la BD
         String fonoEnBase = _alumno.get_telefono();
