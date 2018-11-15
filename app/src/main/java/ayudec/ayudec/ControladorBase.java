@@ -115,7 +115,8 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                     "pertenece.id_ayudantia = ayudantia.id and " +
                                     "pertenece.ayudante = TRUE and " +
                                     "pide.sala = sala.id_sala and " +
-                                    "pide.id_ayudantia = ayudantia.id;";
+                                    "pide.id_ayudantia = ayudantia.id and " +
+                                    "ayudante.matricula != " + current_alumno.get_matricula() + ";";
 
 
                             Log.d("query2", query);
@@ -163,19 +164,17 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                 }
 
                                 query = "SELECT ayudantia.id, ayudante.nombre, ayudante.carrera, asignatura.nombre, sala.horario, sala.id_sala,  ayudantia.capacidad, ayudantia.cantidad_actual " +
-                                        "FROM ayudantia_udec.alumno, ayudantia_udec.inscribe, ayudantia_udec.pertenece, ayudantia_udec.asignatura, ayudantia_udec.sala, ayudantia_udec.alumno as ayudante, ayudantia_udec.estudia, ayudantia_udec.ayudantia, ayudantia_udec.pide " +
-                                        "WHERE alumno.matricula = " + current_alumno.get_matricula() + " and " +
-                                        "inscribe.matricula = alumno.matricula and " +
-                                        "inscribe.cod_asignatura = asignatura.codigo and " +
+                                        "FROM ayudantia_udec.pertenece, ayudantia_udec.asignatura, ayudantia_udec.sala, ayudantia_udec.alumno as ayudante, ayudantia_udec.estudia, ayudantia_udec.ayudantia, ayudantia_udec.pide " +
+                                        "WHERE ayudante.matricula = " + current_alumno.get_matricula() + " and " +
                                         "estudia.cod_asignatura = asignatura.codigo and " +
                                         "estudia.id_ayudantia = ayudantia.id and " +
                                         "pertenece.matricula = ayudante.matricula and " +
                                         "pertenece.id_ayudantia = ayudantia.id and " +
-                                        "pertenece.ayudante = FALSE and " +
+                                        "pertenece.ayudante = TRUE and " +
                                         "pide.sala = sala.id_sala and " +
                                         "pide.id_ayudantia = ayudantia.id;";
 
-                                entro = false;
+                                //entro = false;
 
                                 stmt = c.createStatement();
                                 rs = stmt.executeQuery(query);
@@ -296,6 +295,18 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                         upperProc4.setInt(1, matriculax2);
                         upperProc4.setInt(2, ayudantia_id2);
                         upperProc4.execute();
+                        entro = true;
+                        c.commit();
+                        c.close();
+                        break;
+                    case 8:
+                        c = DriverManager.getConnection("jdbc:postgresql://plop.inf.udec.cl:5432/karleyparada/ayudantia_udec", "karleyparada", "karley.123");
+                        c.setAutoCommit(false);
+                        Log.d("case 8", "borrando ayudantia");
+                        int id_ayudantia = Integer.parseInt(this.ayudantia.getId_ayudantia());
+                        CallableStatement uproc = c.prepareCall("{ call ayudantia_udec.borrarayudantia(?) }");
+                        uproc.setInt(1, id_ayudantia);
+                        uproc.execute();
                         entro = true;
                         c.commit();
                         c.close();

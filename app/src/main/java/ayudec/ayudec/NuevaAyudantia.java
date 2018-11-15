@@ -91,6 +91,7 @@ public class NuevaAyudantia extends AppCompatActivity {
         Toast.makeText(this,"Ayudantía creada con éxito", Toast.LENGTH_SHORT).show();
         finish();
         _pDialog.dismiss();
+
     }
 
     // Método que es llamado por el controladorBase si la creación falló

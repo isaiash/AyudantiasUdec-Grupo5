@@ -177,6 +177,7 @@ public class CustomAdapter extends BaseAdapter {
                     TextView ayudante_nombre_tv = (TextView) myView.findViewById(R.id.ayudante_nombre);
                     String ayudante_nombre = ayudantias[position].getNombre();
                     ayudante_nombre_tv.setText(ayudante_nombre);
+                    ayudante_nombre_tv.setTextColor(Color.parseColor("#B2B200"));
 
                     // Se le pone el ramo a la textview
                     TextView ramo_tv = (TextView) myView.findViewById(R.id.ramo_tv);
@@ -202,24 +203,17 @@ public class CustomAdapter extends BaseAdapter {
 
                     // Se le pone la carrera a la textview
                     TextView carrera_tv = (TextView) myView.findViewById(R.id.ayudante_carrera);
-                    String carrera = ayudantias[position].getCarrera();
-                    carrera_tv.setText(carrera);
+                    //String carrera = ayudantias[position].getCarrera();
+                    carrera_tv.setText("");
 
+                    TextView inscr_tv = myView.findViewById(R.id.inscr_tv);
+                    inscr_tv.setText("");
+                    TextView inscr = myView.findViewById(R.id.inscrito);
+                    inscr.setText("");
 
                     // Se le pone la imagen (Si es que existe)
                     ImageView ayudante_iv = (ImageView) myView.findViewById(R.id.ayudante_imagen);
                     ayudante_iv.setImageResource(R.drawable.icono);
-
-                    TextView inscrito_tv = (TextView) myView.findViewById(R.id.inscrito);
-                    boolean inscrito = ayudantias[position].getInscrito();
-                    if(inscrito){
-                        inscrito_tv.setText("Si");
-                        inscrito_tv.setTextColor(Color.parseColor("#2A9267"));
-                    }
-                    else{
-                        inscrito_tv.setText("No");
-                        inscrito_tv.setTextColor(Color.parseColor("#B20000"));
-                    }
 
                     // Se pone el rating (mientras por defecto se ponen las 5 estrellas siempre)
                     ImageView rating_iv = (ImageView) myView.findViewById(R.id.rating_imagen);
@@ -237,7 +231,7 @@ public class CustomAdapter extends BaseAdapter {
                         homeActivity.startActivity(i);
                         homeActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
-            });
+                });
                 myView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
@@ -249,12 +243,11 @@ public class CustomAdapter extends BaseAdapter {
                                 "Si",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        //_cb.setTipo(7);
-                                        //_cb.setAyudantia(ayudantias[position]);
-                                        //_cb.ejecutar();
-                                        //_cb.setTipo(6);
-                                        //homeActivity.callController();
-                                        Toast.makeText(context, "BORRANDO LA WEA ", Toast.LENGTH_SHORT).show();
+                                        _cb.setTipo(8);
+                                        _cb.setAyudantia(ayudantias[position]);
+                                        _cb.ejecutar();
+                                        homeActivity.callController();
+                                        Toast.makeText(context, "Borrando " + ayudantias[position].getRamo(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                         builder1.setNegativeButton(
@@ -273,7 +266,6 @@ public class CustomAdapter extends BaseAdapter {
 
             // ayudantias disponibles
             else{
-
                 if (view == null) {
                     myView = inflater.inflate(R.layout.activity_gridview,null);
                     // Se le pone el nombre del ayudante a la textview
