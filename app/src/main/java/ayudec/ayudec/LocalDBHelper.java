@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.math.BigInteger;
+
 public class LocalDBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "logged.db";
@@ -65,7 +67,7 @@ public class LocalDBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME,null);
         Alumno alumno = null;
         while(cursor.moveToNext()){
-            alumno = new Alumno(cursor.getString(1),"","",cursor.getString(0), cursor.getString(2), 0);
+            alumno = new Alumno(cursor.getString(1),"","",cursor.getString(0), cursor.getString(2), BigInteger.valueOf(0));
         }
         cursor.close();
         db.close();

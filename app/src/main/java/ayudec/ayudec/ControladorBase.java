@@ -1,3 +1,4 @@
+
 package ayudec.ayudec;
 
 import android.app.Activity;
@@ -5,7 +6,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Debug;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.math.BigInteger;
 import java.sql.CallableStatement;
@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ControladorBase extends AsyncTask<Void, Void, Void> {
     private Alumno _alumno;
@@ -94,61 +95,6 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                         c.commit();
                         c.close();
                         break;
-                    // Case2: query para obtener lista de ayudantias del homeActivity
-                    case 2:
-                        Log.d("case 2","entre al case 2");
-                        GlobalVariables app = (GlobalVariables) homeActivity.getApplication();
-                        Alumno current_alumno = app.getAlumno();
-                        Log.d("global variable alumno", current_alumno.get_nombre());
-                        if (current_alumno != null){
-                            Log.d("else", "haciendo la query");
-                            query = "SELECT ayudante.nombre, ayudante.carrera, asignatura.nombre, sala.id_sala, sala.horario, ayudantia.capacidad " +
-                                    "FROM ayudantia_udec.alumno, ayudantia_udec.inscribe, ayudantia_udec.pertenece, ayudantia_udec.asignatura, ayudantia_udec.sala, ayudantia_udec.alumno as ayudante, ayudantia_udec.estudia, ayudantia_udec.ayudantia, ayudantia_udec.pide " +
-                                    "WHERE alumno.matricula = " + current_alumno.get_matricula() + " and " +
-                                    "inscribe.matricula = alumno.matricula and " +
-                                    "inscribe.cod_asignatura = asignatura.codigo and " +
-                                    "inscribe.semestre LIKE '%2013%' and " +
-                                    "estudia.cod_asignatura = asignatura.codigo and " +
-                                    "estudia.id_ayudantia = ayudantia.id and " +
-                                    "pertenece.matricula = ayudante.matricula and " +
-                                    "pertenece.id_ayudantia = ayudantia.id and " +
-                                    "pertenece.ayudante = TRUE and " +
-                                    "pide.sala = sala.id_sala and " +
-                                    "pide.id_ayudantia = ayudantia.id;";
-
-
-                            Log.d("query2", query);
-                            c = DriverManager.getConnection("jdbc:postgresql://plop.inf.udec.cl:5432/karleyparada/ayudantia_udec", "karleyparada", "karley.123");
-                            c.setAutoCommit(false);
-                            stmt = c.createStatement();
-                            rs = stmt.executeQuery(query);
-                            // nuevo array list donde guardar las ayudantias creadas a partir del query
-                            ArrayList<Ayudantia> ayudantias_arraylist = new ArrayList<Ayudantia>();
-                            entro = false;
-                            while (rs.next()) {
-                                entro = true;
-                                Log.d("query2", rs.getString(1));
-                                // String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating
-                                // select asignatura.nombre, ayudante.carrera, asignatura.nombre, sala.id_sala, sala.horario, ayudantia.capacidad
-                                Ayudantia aux = new Ayudantia(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(6), "","");
-                                Log.d("cupos",aux.getCupos());
-                                ayudantias_arraylist.add(aux);
-                            }
-                            if(ayudantias_arraylist.size() > 0){
-                                this.ayudantias = new Ayudantia[ayudantias_arraylist.size()];
-                                ayudantias = ayudantias_arraylist.toArray(ayudantias);
-
-                            }
-                            else{
-                                entro = false;
-                            }
-                        }
-                        stmt.close();
-                        rs.close();
-                        c.commit();
-                        c.close();
-                        break;
-
                     // Case2: query para obtener lista de ayudantias del homeActivity
                     case 2:
                         Log.d("case 2","entre al case 2");
