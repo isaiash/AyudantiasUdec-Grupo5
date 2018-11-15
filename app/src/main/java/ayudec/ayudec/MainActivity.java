@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity
         // se crea la gridview y se llena con el adaptador lleno de ayudantias
         gridView = (GridView) findViewById(R.id.gridview);
         // Se instancia el adaptador y se setea al gridview con el conjunto de ayudantias
-        CustomAdapter ca = new CustomAdapter(this, ayudantias);
-        gridView.setAdapter(ca);
+        //CustomAdapter ca = new CustomAdapter(this, ayudantias);
+        //gridView.setAdapter(ca);
 
         // Se agrega el Listener para saber que item se presionó
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

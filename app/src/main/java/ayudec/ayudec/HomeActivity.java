@@ -118,14 +118,11 @@ public class HomeActivity extends AppCompatActivity {
         this.ayudantias = listaAyudantias;
         GlobalVariables app = (GlobalVariables) getApplication();
         final Alumno current = app.getAlumno();
-        CustomAdapter ca = new CustomAdapter(this, this.ayudantias);
+        CustomAdapter ca = new CustomAdapter(this, this.ayudantias, HomeActivity.this, current);
         gridView.setAdapter(ca);
-        final ControladorBase _cb = new ControladorBase();
-        _cb.setHome(HomeActivity.this);
-        _cb.set_alumno(current);
-        _cb.setTipo(6);
 
         // Se agrega el Listener
+        /*
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
@@ -147,6 +144,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
+        */
 
         _pDialog.dismiss();
     }
