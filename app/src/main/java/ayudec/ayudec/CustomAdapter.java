@@ -1,18 +1,41 @@
 package ayudec.ayudec;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CustomAdapter extends BaseAdapter {
 
     private Ayudantia[] ayudantias;
-    Context context;
+    private Context context;
+    private HomeActivity homeActivity;
+    Activity activity;
+    final ControladorBase _cb;
+    private Alumno alumno;
+
+
+
+    public CustomAdapter(Context context, Ayudantia[] ayudantias, HomeActivity homeActivity, Alumno alumno){
+        this.context = context;
+        this.ayudantias = ayudantias;
+        this.homeActivity = homeActivity;
+        this.alumno = alumno;
+        _cb = new ControladorBase();
+        _cb.setHome(homeActivity);
+        _cb.set_alumno(this.alumno);
+        _cb.setTipo(6);
+    }
 
     public int setColor(String cupos_){
         int cupos = Integer.parseInt(cupos_);
@@ -29,10 +52,6 @@ public class CustomAdapter extends BaseAdapter {
 
     }
 
-    public CustomAdapter(Context context, Ayudantia[] ayudantias){
-        this.context = context;
-        this.ayudantias = ayudantias;
-    }
 
     @Override
     public int getCount() {
@@ -50,7 +69,7 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View myView = view;
@@ -110,9 +129,81 @@ public class CustomAdapter extends BaseAdapter {
         // Se pone el rating (mientras por defecto se ponen las 5 estrellas siempre)
         ImageView rating_iv = (ImageView) myView.findViewById(R.id.rating_imagen);
         rating_iv.setImageResource(R.drawable.rating);
+
+        myView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(ayudantias[position].getInscrito()){
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                    builder1.setMessage("¿ Desea desinscribirse de " + ayudantias[position].getRamo() + " ?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Si",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    _cb.setTipo(7);
+                                    _cb.setAyudantia(ayudantias[position]);
+                                    _cb.ejecutar();
+                                    //_cb.setTipo(6);
+                                    homeActivity.callController();
+                                }
+                            });
+                    builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+
+                return true;
+            }
+        });
+
+        myView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id_ayudantia = ayudantias[position].getId_ayudantia();
+                if(!ayudantias[position].getInscrito()) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                    builder1.setMessage("¿ Desea inscribirse a " + ayudantias[position].getRamo() + " ?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Si",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    _cb.setAyudantia(ayudantias[position]);
+                                    _cb.setTipo(6);
+                                    _cb.ejecutar();
+                                    homeActivity.callController();
+                                }
+                            });
+                    builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+                else{
+                    Toast.makeText(homeActivity, "Entrando al chat " + ayudantias[position].getId_ayudantia(), Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(homeActivity, Chat.class);
+                    i.putExtra("idAyudantia",ayudantias[position].getId_ayudantia());
+                    homeActivity.startActivity(i);
+                    homeActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+            }
+        });
+
         return myView;
-
-
 
     }
 

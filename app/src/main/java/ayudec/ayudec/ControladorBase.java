@@ -243,6 +243,20 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                         c.commit();
                         c.close();
                         break;
+                    // desinscribir ayudantia
+                    case 7:
+                        c = DriverManager.getConnection("jdbc:postgresql://plop.inf.udec.cl:5432/karleyparada/ayudantia_udec", "karleyparada", "karley.123");
+                        c.setAutoCommit(false);
+                        int matriculax2 = Integer.parseInt(this._alumno.get_matricula());
+                        int ayudantia_id2 = Integer.parseInt(this.ayudantia.getId_ayudantia());
+                        CallableStatement upperProc4 = c.prepareCall("{ call ayudantia_udec.desinscribir(?,?) }");
+                        upperProc4.setInt(1, matriculax2);
+                        upperProc4.setInt(2, ayudantia_id2);
+                        upperProc4.execute();
+                        entro = true;
+                        c.commit();
+                        c.close();
+                        break;
                 }
 
             }
