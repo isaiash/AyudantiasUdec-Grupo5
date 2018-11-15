@@ -1,11 +1,13 @@
 package ayudec.ayudec;
 
+import java.math.BigInteger;
+
 public class Alumno {
 
     private String _nombre, _user, _password, _matricula, _carrera;
-    private int _horario;
+    private BigInteger _horario;
 
-    public Alumno(String nombre, String user, String password, String matricula, String carrera, int horario){
+    public Alumno(String nombre, String user, String password, String matricula, String carrera, BigInteger horario){
         _nombre = nombre;
         _user = user;
         _password = password;
@@ -54,11 +56,11 @@ public class Alumno {
         this._carrera = _carrera;
     }
 
-    public int get_horario() {
+    public BigInteger get_horario() {
         return _horario;
     }
 
-    public void set_horario(int _horario) {
+    public void set_horario(BigInteger _horario) {
         this._horario= _horario;
     }
 }

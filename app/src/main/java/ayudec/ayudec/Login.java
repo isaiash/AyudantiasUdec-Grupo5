@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.math.BigInteger;
+
 
 public class Login extends AppCompatActivity {
     private Alumno _alumno;
@@ -32,7 +34,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String usuario = ((EditText) findViewById(R.id.correo)).getText().toString();
                 String password = ((EditText) findViewById(R.id.password)).getText().toString();
-                _alumno = new Alumno("", usuario, password, "", "", 0);
+                _alumno = new Alumno("", usuario, password, "", "", BigInteger.valueOf(0));
 
 
                 _pDialog = new ProgressDialog(Login.this);
@@ -41,7 +43,9 @@ public class Login extends AppCompatActivity {
                 _pDialog.setMax(100);
                 _pDialog.show();
 
-                _cb = new ControladorBase(_alumno,Login.this);
+                _cb = new ControladorBase();
+                _cb.set_alumno(_alumno);
+                _cb.setLogin(Login.this);
                 _cb.setTipo(1);
                 _cb.ejecutar();
             }
