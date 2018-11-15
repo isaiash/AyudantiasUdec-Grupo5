@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:layout_marginTop="10dp"
+    android:layout_margin="16dp"
+    android:baselineAligned="false"
     android:gravity="center"
-    android:orientation="horizontal"
-    android:baselineAligned="false">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
         android:layout_margin="5dp"
+        android:layout_weight="2"
         android:orientation="vertical">
 
         <TextView
@@ -29,14 +29,14 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="CARRERA"
-            android:textSize="10dp"/>
+            android:textSize="10dp" />
 
         <ImageView
             android:id="@+id/ayudante_imagen"
-            android:layout_margin="5dp"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:layout_margin="5dp"
             android:contentDescription="TODO" />
 
         <ImageView
@@ -51,52 +51,50 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="309dp"
         android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_margin="5dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/ramo_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NOMBRE RAMO"
             android:layout_marginLeft="5dp"
-            android:textSize="18dp"
             android:layout_marginBottom="6dp"
-            android:textStyle="bold"/>
+            android:text="NOMBRE RAMO"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_margin="5dp">
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sala:"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    android:text="Sala:" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Horario:"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp"
+                    android:text="Horario:" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cupos:"
-                    />
+                    android:text="Cupos:" />
 
             </LinearLayout>
 
@@ -104,38 +102,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/sala_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TM 3-2"
                     android:layout_marginBottom="5dp"
-                    android:textStyle="bold"/>
+                    android:text="TM 3-2"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/horario_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LUNES 8 AM"
                     android:layout_marginBottom="5dp"
-                    android:textStyle="bold"/>
+                    android:text="LUNES 8 AM"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/cupos_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2/20"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
         </LinearLayout>
-
-
 
 
     </LinearLayout>
