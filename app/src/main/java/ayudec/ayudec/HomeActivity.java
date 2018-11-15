@@ -53,7 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         gridView.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
             @Override
             public void onSwipeRight() {
-                Toast.makeText(HomeActivity.this, "right", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(HomeActivity.this,ProfileActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -61,7 +60,6 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onSwipeLeft() {
-                Toast.makeText(HomeActivity.this, "left", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(HomeActivity.this,Chat.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
