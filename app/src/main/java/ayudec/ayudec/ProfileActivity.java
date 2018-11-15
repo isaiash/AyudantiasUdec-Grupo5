@@ -44,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity_layout);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        _cb = new ControladorBase();
 
         ScrollView sv = (ScrollView) findViewById(R.id.principal);
         final TextView correoElectText = findViewById(R.id.mailDisplay);
@@ -61,10 +62,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Obtiene el correo del alumno desde la BD
         String correoEnBase = _alumno.get_correo();
+        correoElectText.setText(correoEnBase);
 
         // Obtiene el teléfono del alumno desde la BD
         String fonoEnBase = _alumno.get_telefono();
-
+        fonoText.setText(fonoEnBase);
         //Mostrar correo en la actividad
         if (correoEnBase != null) {
             correoElectText.setText(correoEnBase);
@@ -116,6 +118,8 @@ public class ProfileActivity extends AppCompatActivity {
                             hideKeyboardFrom(getApplicationContext(),view);
                             correoElectText.setCursorVisible(false);
                             inputCorreo.setVisibility(View.GONE);
+                            _cb.set_alumno(_alumno);
+                            _cb.ejecutar();
                             return true;
                         } else {
                             Toast.makeText(getApplicationContext(),"El texto ingresado no corresponde a un correo electrónico.", Toast.LENGTH_SHORT).show();
@@ -163,6 +167,8 @@ public class ProfileActivity extends AppCompatActivity {
                             hideKeyboardFrom(getApplicationContext(), view);
                             inputFono.setCursorVisible(false);
                             inputFono.setVisibility(View.GONE);
+                            _cb.set_alumno(_alumno);
+                            _cb.ejecutar();
                             return true;
                         } else {
                             Toast.makeText(getApplicationContext(),"El texto ingresado no corresponde a un número telefónico.", Toast.LENGTH_SHORT).show();
@@ -211,6 +217,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException exception) {
                 // App code
+                Toast.makeText(ProfileActivity.this, "", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -227,6 +234,7 @@ public class ProfileActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
 // Borra las variables globales, el stack de activities y redirige al activity del login
     public void cerrarSesion(View view){

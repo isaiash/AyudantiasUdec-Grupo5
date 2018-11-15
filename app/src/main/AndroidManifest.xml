@@ -41,7 +41,7 @@
         <activity
             android:name=".ProfileActivity"
             android:label="Perfil"
-            android:theme="@style/HomeTheme">
+            android:theme="@style/ProfTheme">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
