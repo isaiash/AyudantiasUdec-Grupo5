@@ -80,7 +80,12 @@ public class Chat extends AppCompatActivity {
         fotoPerfilCadena = "";
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("chat");//Sala de chat (nombre)
+        //databaseReference = database.getReference("chat");//Sala de chat (nombre)
+        String idSala = this.getIntent().getExtras().getString("idAyudantia");
+        if(idSala!=null) databaseReference = database.getReference("idSala");//Sala de chat (nombre)
+        else databaseReference = database.getReference("chat");//Sala de chat (nombre)
+
+
         storage = FirebaseStorage.getInstance();
 
         adapter = new AdapterMensajes(this);

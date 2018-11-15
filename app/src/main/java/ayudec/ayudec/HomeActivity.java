@@ -139,6 +139,10 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(HomeActivity.this, "ya está inscrito " + ayudantias[position].getId_ayudantia(), Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(HomeActivity.this, Chat.class);
+                    //i.putExtra("idAyudantia",ayudantias[position].getID());
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             }
 
