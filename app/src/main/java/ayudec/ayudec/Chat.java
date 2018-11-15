@@ -1,5 +1,6 @@
 package ayudec.ayudec;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -51,10 +52,21 @@ public class Chat extends AppCompatActivity {
     private String fotoPerfilCadena;
     private Alumno _alumno;
     private CallbackManager callbackManager;
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        RecyclerView ll = (RecyclerView) findViewById(R.id.rvMensajes);
+
+        ll.setOnTouchListener(new OnSwipeTouchListener(Chat.this) {
+            @Override
+            public void onSwipeRight() {
+                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
 
         callbackManager = CallbackManager.Factory.create();
         _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
