@@ -1,10 +1,15 @@
 package ayudec.ayudec;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -58,6 +63,31 @@ public class AdapterMensajes extends RecyclerView.Adapter<HolderMensaje> {
         Date d = new Date(codigoHora);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");//a pm o am
         holder.getHora().setText(sdf.format(d));
+
+        // ESTA WEA EN ADELANTE
+        Alumno _alumno = ((GlobalVariables) ((Activity)c).getApplication()).getAlumno();
+        Mensaje mensaje = listMensaje.get(position);
+        if(mensaje.getNombre().equals(_alumno.get_nombre())) {
+            Log.d("DATOS:", "--" + mensaje.getNombre() + "---" + _alumno.get_nombre()+"---");
+            View layout =  holder.getView();
+            CardView card = (CardView) layout.findViewById(R.id.card_view);
+            card.setCardBackgroundColor(Color.LTGRAY);
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) layout.getLayoutParams();
+            //layout.setBackgroundColor(Color.LTGRAY);
+            //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            holder.getView().setLayoutParams(layoutParams);
+        }
+        else{
+            View layout =  holder.getView();
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) layout.getLayoutParams();
+            //layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+            holder.getView().setLayoutParams(layoutParams);
+            Log.d("DATOS:", "TUDO BEM MANO " + mensaje.getMensaje());
+            Log.d("DATOS:", "--" + mensaje.getNombre() + "---" + _alumno.get_nombre()+"---");
+            Log.d("MENSAJE:",  mensaje.getMensaje());
+        }
     }
 
     @Override

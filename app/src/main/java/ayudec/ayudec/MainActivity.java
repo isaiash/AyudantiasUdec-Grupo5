@@ -48,15 +48,11 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
-
-        // se crean la ayudantias para ejemplo
-        ayudantias = crearAyudantias();
-
         // se crea la gridview y se llena con el adaptador lleno de ayudantias
         gridView = (GridView) findViewById(R.id.gridview);
         // Se instancia el adaptador y se setea al gridview con el conjunto de ayudantias
-        CustomAdapter ca = new CustomAdapter(this, ayudantias);
-        gridView.setAdapter(ca);
+        //CustomAdapter ca = new CustomAdapter(this, ayudantias);
+        //gridView.setAdapter(ca);
 
         // Se agrega el Listener para saber que item se presionó
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -147,51 +143,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    // Método de prueba para crear la lista de ayudantias (esto se debe generar a partir de una consulta)
-    // En este ejemplo se crean 3 ayudantias, se agregan al ArrayList y luego el ArrayList se transforma en Array
-    // Se hizo de esta forma ya que el adaptador requiere un Array (no ArrayList) y los arrays de java deben ser instanciados con su tamaño
-    // Al no saber el tamaño se hace de esta forma super weona
-    private Ayudantia[] crearAyudantias() {
-        ArrayList<Ayudantia> ayudantias_arraylist = new ArrayList<Ayudantia>();
-
-        Ayudantia ayudantia1 = new Ayudantia("Francisco Salas",
-                "Ingeniería Civil Informática",
-                "IMU",
-                "Jueves 5 PM",
-                "TM 3-1",
-                "13",
-                "https://cdn.xl.thumbs.canstockphoto.es/lindo-triste-malhumorado-gato-icon-gato-avatar-eps-vectorial_csp49239081.jpg",
-                "3");
-
-        Ayudantia ayudantia2 = new Ayudantia("Tania Rivas",
-                "Geofísica",
-                "Física 2",
-                "Martes 10 AM",
-                "IS 2-2",
-                "1",
-                "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
-                "5");
-
-        Ayudantia ayudantia3 = new Ayudantia("Juan Perez",
-                "Ingeniería Civil Industrial",
-                "Cálculo 3",
-                "Lunes 3 PM",
-                "TM 3-8",
-                "18",
-                "https://lh5.googleusercontent.com/-NVHdsx0r0Xk/TYyS1Qen3JI/AAAAAAAAAGU/AMvdDulXehs/w1200-h630-p-nu/zarpas.png",
-                "5");
-
-        ayudantias_arraylist.add(ayudantia1);
-        ayudantias_arraylist.add(ayudantia2);
-        ayudantias_arraylist.add(ayudantia3);
-
-        // Se crea el array a partir del ArrayList
-        Ayudantia[] ayudantias = new Ayudantia[ayudantias_arraylist.size()];
-        ayudantias = ayudantias_arraylist.toArray(ayudantias);
-
-        return ayudantias;
     }
 
 }

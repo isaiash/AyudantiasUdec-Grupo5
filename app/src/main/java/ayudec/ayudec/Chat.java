@@ -1,7 +1,9 @@
 package ayudec.ayudec;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +16,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.facebook.CallbackManager;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,10 +52,21 @@ public class Chat extends AppCompatActivity {
     private String fotoPerfilCadena;
     private Alumno _alumno;
     private CallbackManager callbackManager;
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        RecyclerView ll = (RecyclerView) findViewById(R.id.rvMensajes);
+
+        ll.setOnTouchListener(new OnSwipeTouchListener(Chat.this) {
+            @Override
+            public void onSwipeRight() {
+                finish();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
 
         callbackManager = CallbackManager.Factory.create();
         _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
@@ -64,7 +80,12 @@ public class Chat extends AppCompatActivity {
         fotoPerfilCadena = "";
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("chat");//Sala de chat (nombre)
+        //databaseReference = database.getReference("chat");//Sala de chat (nombre)
+        String idSala = this.getIntent().getExtras().getString("idAyudantia");
+        if(idSala!=null) databaseReference = database.getReference(idSala);//Sala de chat (nombre)
+        else databaseReference = database.getReference("chat");//Sala de chat (nombre)
+
+
         storage = FirebaseStorage.getInstance();
 
         adapter = new AdapterMensajes(this);
@@ -149,28 +170,46 @@ public class Chat extends AppCompatActivity {
             Uri u = data.getData();
             storageReference = storage.getReference("imagenes_chat");//imagenes_chat
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fotoReferencia.putFile(u).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //Uri u = taskSnapshot.getDownloadUrl();
-                    Uri u = taskSnapshot.getUploadSessionUri();
-                    MensajeEnviar m = new MensajeEnviar("Kevin te ha enviado una foto",u.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
-                    databaseReference.push().setValue(m);
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+                    return fotoReferencia.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()) {
+                        Uri uri = task.getResult();
+                        MensajeEnviar m = new MensajeEnviar(_alumno.get_nombre() + " te ha enviado una foto",uri.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
+                        databaseReference.push().setValue(m);
+                    }
                 }
             });
         }else if(requestCode == PHOTO_PERFIL && resultCode == RESULT_OK){
             Uri u = data.getData();
             storageReference = storage.getReference("foto_perfil");//imagenes_chat
             final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fotoReferencia.putFile(u).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //Uri u = taskSnapshot.getDownloadUrl();
-                    Uri u = taskSnapshot.getUploadSessionUri();
-                    fotoPerfilCadena = u.toString();
-                    MensajeEnviar m = new MensajeEnviar("Kevin ha actualizado su foto de perfil",u.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
-                    databaseReference.push().setValue(m);
-                    Glide.with(Chat.this).load(u.toString()).into(fotoPerfil);
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if(!task.isSuccessful()){
+                        throw task.getException();
+                    }
+                    return fotoReferencia.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if(task.isSuccessful()) {
+                        Uri uri = task.getResult();
+                        fotoPerfilCadena = uri.toString();
+                        MensajeEnviar m = new MensajeEnviar(_alumno.get_nombre() + " ha actualizado su foto de perfil",uri.toString(),nombre.getText().toString(),fotoPerfilCadena,"2",ServerValue.TIMESTAMP);
+                        databaseReference.push().setValue(m);
+                        Glide.with(Chat.this).load(uri.toString()).into(fotoPerfil);
+                    }
                 }
             });
         }
