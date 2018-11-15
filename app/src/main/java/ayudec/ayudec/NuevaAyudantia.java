@@ -50,7 +50,6 @@ public class NuevaAyudantia extends AppCompatActivity {
 
         this.sp_asignaturas.setAdapter(dataAtapter);
     }
-
     // Método que es llamado por el controlador, setea las salas del Spinner
     public void setSalas(List<String> listaSalas){
         this.salas = listaSalas;
@@ -103,6 +102,5 @@ public class NuevaAyudantia extends AppCompatActivity {
     // Método para volver a activity anterior (se ejecuta en el botón de back)
     public void back(View view){
         finish();
-
     }
 }

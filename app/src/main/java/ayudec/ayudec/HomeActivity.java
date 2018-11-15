@@ -21,14 +21,14 @@ public class HomeActivity extends AppCompatActivity {
     private Ayudantia[] ayudantias;
     private GridView gridView;
     private ProgressDialog _pDialog;
+    private Alumno _alumno;
+    private GridView gridView;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
 
         // se settea el toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,6 +42,9 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(login);
         }
 
+        // se crean la ayudantias
+        //ayudantias = crearAyudantias();
+
         gridView = (GridView) findViewById(R.id.gridview);
 
 
@@ -51,6 +54,30 @@ public class HomeActivity extends AppCompatActivity {
 
         // Listeners de la gridview para cuando se deslice abajo/derecha/izquierda
         gridView.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
+            @Override
+            public void onSwipeRight() {
+                Intent i = new Intent(HomeActivity.this,ProfileActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                Toast.makeText(HomeActivity.this, "left", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(HomeActivity.this,Chat.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+            @Override
+            public void onSwipeBottom() {
+                Toast.makeText(HomeActivity.this,"Refrescando!",Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        // Se setean los listener del layout para que identifique cuando se deslice a la derecha e izquierda
+        RelativeLayout mainLayout = findViewById(R.id.main_layout);
+        mainLayout.setOnTouchListener(new OnSwipeTouchListener(HomeActivity.this) {
             @Override
             public void onSwipeRight() {
                 Toast.makeText(HomeActivity.this, "right", Toast.LENGTH_SHORT).show();
@@ -116,7 +143,6 @@ public class HomeActivity extends AppCompatActivity {
 
     // Método llamado por el controlador que setea las ayudantías en las grillas y les agrega el listener correspondiente
     public void setAyudantias(final Ayudantia[] listaAyudantias){
-
         this.ayudantias = listaAyudantias;
 
         CustomAdapter ca = new CustomAdapter(this, this.ayudantias);
@@ -138,7 +164,6 @@ public class HomeActivity extends AppCompatActivity {
 
         _pDialog.dismiss();
     }
-
     public void noHay(){
         Toast.makeText(HomeActivity.this, "No tiene ayudantias disponibles." ,Toast.LENGTH_SHORT).show();
         _pDialog.dismiss();

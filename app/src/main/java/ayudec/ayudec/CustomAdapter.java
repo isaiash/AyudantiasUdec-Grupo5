@@ -19,7 +19,6 @@ public class CustomAdapter extends BaseAdapter {
 
         if(cupos > 15){
             return Color.parseColor("#CC2828");
-
         }
         else if(cupos > 10){
             return Color.parseColor("#CDC648");
