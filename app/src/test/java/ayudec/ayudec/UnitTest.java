@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigInteger;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,7 +30,7 @@ public class UnitTest {
     public String nombre = "Test";
     public String password = "test";
     public String carrera = "Test";
-    public int horario = 999;
+    public BigInteger horario = BigInteger.valueOf(999);
     public String correo = "test@test";
     public String telefono = "999";
     public String sala = "Test";
@@ -52,7 +53,7 @@ public class UnitTest {
     @Test
     public void t2_logearse() {
         login = new Login();
-        _alumno = new Alumno("", usuario, password, "", "", 0);
+        _alumno = new Alumno("", usuario, password, "", "", horario);
         _cb = new ControladorBase();
         _cb.set_alumno(_alumno);
         _cb.setLogin(login);
@@ -61,7 +62,7 @@ public class UnitTest {
 
     @Test
     public void t3_ayudantia() {
-        Ayudantia aux = new Ayudantia(nombre, "", ramo, "", sala, cupo,"", "");
+        Ayudantia aux = new Ayudantia("999",nombre, "", ramo, "", sala, cupo,"", "",false,"999");
         _cb = new ControladorBase();
         _cb.setAyudantia(aux);
         _cb.setTipo(4);
