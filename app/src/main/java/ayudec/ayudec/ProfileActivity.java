@@ -73,6 +73,9 @@ public class ProfileActivity extends AppCompatActivity {
         } else
             correoElectText.setText(_alumno.get_correo());
 
+        String correoEnBase = _alumno.get_user() + "@udec.cl";
+
+
         // Obtiene el teléfono del alumno desde la BD
         String fonoEnBase = _alumno.get_telefono();
         if (_alumno.get_telefono()== null){
@@ -170,7 +173,11 @@ public class ProfileActivity extends AppCompatActivity {
                     if (numeroTel.equals("")){
                         Toast.makeText(getApplicationContext(),"Ingrese un correo electrónico.", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (isValidPhone(numeroTel) ) {
+                        if (isValidPhone(numeroTel) && numeroTel.length() > 7) {
+                            if (numeroTel.indexOf("+569") < 0){
+                                String tmp = "+569"+numeroTel;
+                                numeroTel = tmp;
+                            }
                             fonoText.setText(numeroTel);
                             _alumno.set_telefono(numeroTel);
                             fonoText.setVisibility(View.VISIBLE);

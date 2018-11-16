@@ -109,14 +109,14 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                     "WHERE alumno.matricula = " + current_alumno.get_matricula() + " and " +
                                     "inscribe.matricula = alumno.matricula and " +
                                     "inscribe.cod_asignatura = asignatura.codigo and " +
-                                    "inscribe.semestre LIKE '%2013%' and " +
                                     "estudia.cod_asignatura = asignatura.codigo and " +
                                     "estudia.id_ayudantia = ayudantia.id and " +
                                     "pertenece.matricula = ayudante.matricula and " +
                                     "pertenece.id_ayudantia = ayudantia.id and " +
                                     "pertenece.ayudante = TRUE and " +
                                     "pide.sala = sala.id_sala and " +
-                                    "pide.id_ayudantia = ayudantia.id;";
+                                    "pide.id_ayudantia = ayudantia.id and " +
+                                    "ayudante.matricula != " + current_alumno.get_matricula() + ";";
 
 
                             Log.d("query2", query);
@@ -127,6 +127,9 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                             rs = stmt.executeQuery(query);
                             // nuevo array list donde guardar las ayudantias creadas a partir del query
                             ArrayList<Ayudantia> ayudantias_arraylist = new ArrayList<Ayudantia>();
+                            ArrayList<Ayudantia> mis_ayudantias = new ArrayList<Ayudantia>();
+                            ArrayList<Ayudantia> ayudantias_disponibles = new ArrayList<Ayudantia>();
+                            ArrayList<Ayudantia> ayudantias_tomadas = new ArrayList<Ayudantia>();
                             entro = false;
                             while (rs.next()) {
                                 entro = true;
@@ -152,9 +155,48 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                                     while(rs.next()){
                                         ayudantias_arraylist.get(i).setInscrito(true);
                                     }
+                                    if(ayudantias_arraylist.get(i).getInscrito()){
+                                        ayudantias_tomadas.add(ayudantias_arraylist.get(i));
+                                    }
+                                    else{
+                                        ayudantias_disponibles.add(ayudantias_arraylist.get(i));
+                                    }
                                 }
-                                this.ayudantias = new Ayudantia[ayudantias_arraylist.size()];
-                                ayudantias = ayudantias_arraylist.toArray(ayudantias);
+
+                                query = "SELECT ayudantia.id, ayudante.nombre, ayudante.carrera, asignatura.nombre, sala.horario, sala.id_sala,  ayudantia.capacidad, ayudantia.cantidad_actual " +
+                                        "FROM ayudantia_udec.pertenece, ayudantia_udec.asignatura, ayudantia_udec.sala, ayudantia_udec.alumno as ayudante, ayudantia_udec.estudia, ayudantia_udec.ayudantia, ayudantia_udec.pide " +
+                                        "WHERE ayudante.matricula = " + current_alumno.get_matricula() + " and " +
+                                        "estudia.cod_asignatura = asignatura.codigo and " +
+                                        "estudia.id_ayudantia = ayudantia.id and " +
+                                        "pertenece.matricula = ayudante.matricula and " +
+                                        "pertenece.id_ayudantia = ayudantia.id and " +
+                                        "pertenece.ayudante = TRUE and " +
+                                        "pide.sala = sala.id_sala and " +
+                                        "pide.id_ayudantia = ayudantia.id;";
+
+                                //entro = false;
+
+                                stmt = c.createStatement();
+                                rs = stmt.executeQuery(query);
+                                while (rs.next()) {
+                                    entro = true;
+                                    hay = true;
+                                    Log.d("query3", rs.getString(1));
+                                    // String id_ayudantia, String nombre, String carrera, String ramo, String horario, String sala, String cupos, String imagen_url, String rating, boolean inscrito, String current_cupos
+                                    // select asignatura.id, asignatura.nombre, ayudante.carrera, asignatura.nombre, sala.horario, sala.id_sala ayudantia.capacidad
+                                    Ayudantia aux = new Ayudantia(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), rs.getString(7),"","", false, rs.getString(8));
+                                    Log.d("cupos",aux.getCupos());
+                                    mis_ayudantias.add(aux);
+                                }
+
+                                ArrayList<Ayudantia> finalArrayList = new ArrayList<Ayudantia>();
+
+                                finalArrayList.addAll(mis_ayudantias);
+                                finalArrayList.addAll(ayudantias_tomadas);
+                                finalArrayList.addAll(ayudantias_disponibles);
+
+                                this.ayudantias = new Ayudantia[finalArrayList.size()];
+                                ayudantias = finalArrayList.toArray(ayudantias);
                             }
                         }
                         stmt.close();
@@ -253,6 +295,18 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
                         upperProc4.setInt(1, matriculax2);
                         upperProc4.setInt(2, ayudantia_id2);
                         upperProc4.execute();
+                        entro = true;
+                        c.commit();
+                        c.close();
+                        break;
+                    case 8:
+                        c = DriverManager.getConnection("jdbc:postgresql://plop.inf.udec.cl:5432/karleyparada/ayudantia_udec", "karleyparada", "karley.123");
+                        c.setAutoCommit(false);
+                        Log.d("case 8", "borrando ayudantia");
+                        int id_ayudantia = Integer.parseInt(this.ayudantia.getId_ayudantia());
+                        CallableStatement uproc = c.prepareCall("{ call ayudantia_udec.borrarayudantia(?) }");
+                        uproc.setInt(1, id_ayudantia);
+                        uproc.execute();
                         entro = true;
                         c.commit();
                         c.close();

@@ -98,6 +98,10 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    public void refresh(View view){
+        callController();
+    }
+
     // Método que instancia un controlador y lo ejecuta para obtener las ayudantías para la grilla
     public void callController(){
 
