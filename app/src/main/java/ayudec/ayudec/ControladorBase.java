@@ -379,6 +379,8 @@ public class ControladorBase extends AsyncTask<Void, Void, Void> {
         return entro;
     }
 
+    public boolean isConectado(){return conectado;}
+
     public void setEntro(boolean entro) {
         this.entro = entro;
     }
