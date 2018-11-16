@@ -78,6 +78,7 @@ public class CustomAdapter extends BaseAdapter {
         if(ayudantias[position].getInscrito()){
             if (view == null) {
                 myView = inflater.inflate(R.layout.activity_gridview,null);
+                myView.setBackgroundColor(Color.parseColor("#fff7c9"));
                 // Se le pone el nombre del ayudante a la textview
                 TextView ayudante_nombre_tv = (TextView) myView.findViewById(R.id.ayudante_nombre);
                 String ayudante_nombre = ayudantias[position].getNombre();
@@ -173,9 +174,10 @@ public class CustomAdapter extends BaseAdapter {
             if(ayudantias[position].getNombre().equals(alumno.get_nombre())){
                 if(myView == null){
                     myView = inflater.inflate(R.layout.activity_gridview,null);
+                    myView.setBackgroundColor(Color.parseColor("#ffdede"));
                     // Se le pone el nombre del ayudante a la textview
                     TextView ayudante_nombre_tv = (TextView) myView.findViewById(R.id.ayudante_nombre);
-                    String ayudante_nombre = ayudantias[position].getNombre();
+                    String ayudante_nombre = "Yo";
                     ayudante_nombre_tv.setText(ayudante_nombre);
                     ayudante_nombre_tv.setTextColor(Color.parseColor("#B2B200"));
 
@@ -268,6 +270,7 @@ public class CustomAdapter extends BaseAdapter {
             else{
                 if (view == null) {
                     myView = inflater.inflate(R.layout.activity_gridview,null);
+                    myView.setBackgroundColor(Color.parseColor("#d5ffd8"));
                     // Se le pone el nombre del ayudante a la textview
                     TextView ayudante_nombre_tv = (TextView) myView.findViewById(R.id.ayudante_nombre);
                     String ayudante_nombre = ayudantias[position].getNombre();
