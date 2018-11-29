@@ -48,6 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         setContentView(R.layout.profile_activity_layout);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        _cb = new ControladorBase();
 
         ScrollView sv = (ScrollView) findViewById(R.id.principal);
         final TextView correoElectText = findViewById(R.id.mailDisplay);
@@ -64,19 +65,23 @@ public class ProfileActivity extends AppCompatActivity {
         _alumno = ((GlobalVariables) this.getApplication()).getAlumno();
 
         // Obtiene el correo del alumno desde la BD
+
+        //correoElectText.setText(correoEnBase);
+        if (_alumno.get_correo()==null){
+            Toast.makeText(this, _alumno.get_user()+"@udec.cl", Toast.LENGTH_SHORT).show();
+            correoElectText.setText(_alumno.get_user()+"@udec.cl");
+        } else
+            correoElectText.setText(_alumno.get_correo());
+
         String correoEnBase = _alumno.get_user() + "@udec.cl";
+
 
         // Obtiene el teléfono del alumno desde la BD
         String fonoEnBase = _alumno.get_telefono();
-
-        //Mostrar correo en la actividad
-        if (correoEnBase != null) {
-            correoElectText.setText(correoEnBase);
-        }
-        //Mostrar fono en la actividad
-        if (fonoEnBase != null) {
+        if (_alumno.get_telefono()== null){
+            fonoText.setText(defFonoText);
+        } else
             fonoText.setText(fonoEnBase);
-        }
 
         ((TextView)findViewById(R.id.userName)).setText(_alumno.get_nombre());
 
@@ -120,6 +125,8 @@ public class ProfileActivity extends AppCompatActivity {
                             hideKeyboardFrom(getApplicationContext(),view);
                             correoElectText.setCursorVisible(false);
                             inputCorreo.setVisibility(View.GONE);
+                            _cb.set_alumno(_alumno);
+                            _cb.ejecutar();
                             return true;
                         } else {
                             Toast.makeText(getApplicationContext(),"El texto ingresado no corresponde a un correo electrónico.", Toast.LENGTH_SHORT).show();
@@ -130,6 +137,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        final String finalCorreoEnBase = _alumno.get_correo();
         inputCorreo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -137,6 +145,12 @@ public class ProfileActivity extends AppCompatActivity {
                     inputCorreo.setVisibility(View.GONE);
                     inputCorreo.clearFocus();
                     correoElectText.setVisibility(View.VISIBLE);
+                } else {
+                    if (correoElectText.getText().toString()!= finalCorreoEnBase){
+                        inputCorreo.setText(correoElectText.getText().toString());
+                        inputCorreo.setVisibility(View.VISIBLE);
+                        correoElectText.setVisibility(View.GONE);
+                    }
                 }
             }
         });
@@ -159,7 +173,11 @@ public class ProfileActivity extends AppCompatActivity {
                     if (numeroTel.equals("")){
                         Toast.makeText(getApplicationContext(),"Ingrese un correo electrónico.", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (isValidPhone(numeroTel) ) {
+                        if (isValidPhone(numeroTel) && numeroTel.length() > 7) {
+                            if (numeroTel.indexOf("+569") < 0){
+                                String tmp = "+569"+numeroTel;
+                                numeroTel = tmp;
+                            }
                             fonoText.setText(numeroTel);
                             _alumno.set_telefono(numeroTel);
                             fonoText.setVisibility(View.VISIBLE);
@@ -167,6 +185,8 @@ public class ProfileActivity extends AppCompatActivity {
                             hideKeyboardFrom(getApplicationContext(), view);
                             inputFono.setCursorVisible(false);
                             inputFono.setVisibility(View.GONE);
+                            _cb.set_alumno(_alumno);
+                            _cb.ejecutar();
                             return true;
                         } else {
                             Toast.makeText(getApplicationContext(),"El texto ingresado no corresponde a un número telefónico.", Toast.LENGTH_SHORT).show();
@@ -184,6 +204,12 @@ public class ProfileActivity extends AppCompatActivity {
                     inputFono.setVisibility(View.GONE);
                     inputFono.clearFocus();
                     fonoText.setVisibility(View.VISIBLE);
+                } else {
+                    if (fonoText.getText().toString()!=defFonoText){
+                        inputFono.setText(fonoText.getText().toString());
+                        inputFono.setVisibility(View.VISIBLE);
+                        fonoText.setVisibility(View.GONE);
+                    }
                 }
             }
         });
@@ -215,6 +241,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException exception) {
                 // App code
+                Toast.makeText(ProfileActivity.this, "", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -231,6 +258,7 @@ public class ProfileActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 
 // Borra las variables globales, el stack de activities y redirige al activity del login
     public void cerrarSesion(View view){

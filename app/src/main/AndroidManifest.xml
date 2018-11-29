@@ -46,11 +46,14 @@
         <activity
             android:name=".ProfileActivity"
             android:label="Perfil"
-            android:theme="@style/HomeTheme">
+            android:theme="@style/ProfTheme">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ayudec.ayudec.HomeActivity" />
         </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
